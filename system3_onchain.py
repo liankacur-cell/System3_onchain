@@ -4,6 +4,7 @@
 ║        SYSTEM3 v1.0.1 — FUTURES CORE ENGINE                ║
 ║        Derivatives-First Decision Model                    ║
 ║        STABILITY MODE — LOCKED                             ║
+║        + Trending Scanner                                  ║
 ║        Target: Termux Android | Single File                ║
 ╚══════════════════════════════════════════════════════════════╝
 """
@@ -82,6 +83,10 @@ CONFIG = {
     "cache_ttl_seconds": 2,
     "spike_threshold": 6,
     "github_repo_path": os.path.expanduser("~/System3_onchain"),
+    
+    "enable_trending_scanner": True,
+    "trending_limit": 20,
+    "trending_min_volume": 10_000_000,
 }
 
 CYCLE_INTERVAL = CONFIG["cycle_minutes"] * 60
@@ -312,7 +317,7 @@ class TelegramSummary:
         Telegram.send(text)
 
 # ═══════════════════════════════════════════════════════════════
-# INTEGRATION LAYER — GitHub Logger (FINAL FIX)
+# INTEGRATION LAYER — GitHub Logger
 # ═══════════════════════════════════════════════════════════════
 
 class GitHubSync:
@@ -466,6 +471,62 @@ class DataIngestion:
             except:
                 return None
         return None
+
+# ═══════════════════════════════════════════════════════════════
+# TRENDING SCANNER
+# ═══════════════════════════════════════════════════════════════
+
+class TrendingScanner:
+
+    @staticmethod
+    def get_top_trending(limit=20):
+
+        url = "https://fapi.binance.com/fapi/v1/ticker/24hr"
+
+        r = SafeRequest.get(url)
+
+        if not r:
+            return []
+
+        try:
+            data = r.json()
+
+            candidates = []
+
+            for item in data:
+
+                symbol = item.get("symbol", "")
+
+                if not symbol.endswith("USDT"):
+                    continue
+
+                volume = normalize(item.get("quoteVolume"))
+
+                if volume < CONFIG["trending_min_volume"]:
+                    continue
+
+                change_pct = abs(
+                    normalize(item.get("priceChangePercent"))
+                )
+
+                score = volume * 0.4 + change_pct * 100000
+
+                candidates.append(
+                    (symbol, score)
+                )
+
+            candidates.sort(
+                key=lambda x: x[1],
+                reverse=True
+            )
+
+            return [
+                x[0]
+                for x in candidates[:limit]
+            ]
+
+        except:
+            return []
 
 # ═══════════════════════════════════════════════════════════════
 # MARKET FILTER LAYER
@@ -1187,6 +1248,7 @@ def main():
     
     print("╔══════════════════════════════════════════════════════════╗")
     print("║   SYSTEM3 v1.0.1 — FUTURES CORE ENGINE                 ║")
+    print("║   + Trending Scanner                                   ║")
     print("╚══════════════════════════════════════════════════════════╝")
     print(f"  Start: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()
@@ -1207,16 +1269,33 @@ def main():
     while True:
         SIGNAL_BUFFER = []
         
+        # ─── Trending Scanner ──────────────────────
+        if CONFIG["enable_trending_scanner"]:
+            trending_pairs = TrendingScanner.get_top_trending(
+                CONFIG["trending_limit"]
+            )
+        else:
+            trending_pairs = []
+        
+        scan_pairs = list(
+            dict.fromkeys(
+                PAIR_UNIVERSE_CORE + trending_pairs
+            )
+        )
+        
+        print("\nTRENDING PAIRS:")
+        print(trending_pairs)
+        
         system3 = System3()
         total_signals = 0
         long_count = 0
         short_count = 0
         no_trade_count = 0
 
-        print("▸ CORE PAIRS")
+        print("▸ SCANNING PAIRS")
         print("─" * 60)
-        for i, symbol in enumerate(PAIR_UNIVERSE_CORE, 1):
-            print(f"\n[{i}/{len(PAIR_UNIVERSE_CORE)}] Processing {symbol}...")
+        for i, symbol in enumerate(scan_pairs, 1):
+            print(f"\n[{i}/{len(scan_pairs)}] Processing {symbol}...")
             try:
                 result = system3.run_cycle(symbol)
                 total_signals += 1
