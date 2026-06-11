@@ -14,6 +14,7 @@ import time
 import os
 import random
 import threading
+import subprocess
 from pathlib import Path
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
@@ -58,6 +59,8 @@ except ImportError:
 # ═══════════════════════════════════════════════════════════════
 
 APP_CONFIG = {
+    "telegram_bot_token": os.getenv("TELEGRAM_BOT_TOKEN"),
+    "telegram_chat_id": os.getenv("TELEGRAM_CHAT_ID"),
     "github_token": os.getenv("GITHUB_TOKEN"),
     "github_repo": "liankacur-cell/System3_onchain"
 }
@@ -257,31 +260,33 @@ class SpikeMemory:
         return sum(h["s"] > CONFIG["spike_threshold"] for h in history) >= 2
 
 # ═══════════════════════════════════════════════════════════════
-# INTEGRATION LAYER — Telegram (FIXED)
+# INTEGRATION LAYER — Telegram
 # ═══════════════════════════════════════════════════════════════
 
 class Telegram:
+    BOT_TOKEN = APP_CONFIG["telegram_bot_token"]
+    CHAT_ID = APP_CONFIG["telegram_chat_id"]
+
     @staticmethod
     def send(text):
-        token = os.getenv("TELEGRAM_BOT_TOKEN")
-        chat_id = os.getenv("TELEGRAM_CHAT_ID")
-
-        if not token or not chat_id:
-            print("[TELEGRAM] SKIP - missing env")
-            return
-
-        url = f"https://api.telegram.org/bot{token}/sendMessage"
-
-        payload = {
-            "chat_id": chat_id,
-            "text": text
-        }
-
         try:
-            r = requests.post(url, json=payload, timeout=10)
-            print("[TELEGRAM] SENT:", r.status_code)
-        except Exception as e:
-            print("[TELEGRAM ERROR]", e)
+            url = f"https://api.telegram.org/bot{Telegram.BOT_TOKEN}/sendMessage"
+            r = SafeRequest.post(url, json_data={
+                "chat_id": Telegram.CHAT_ID,
+                "text": text,
+                "parse_mode": None
+            })
+
+            if r and r.status_code == 200:
+                print("✔ TELEGRAM PUSH SUCCESS")
+                return True
+            else:
+                print("✖ TELEGRAM PUSH FAILED")
+                return False
+
+        except:
+            print("✖ TELEGRAM ERROR")
+            return False
 
 class TelegramSummary:
     cycle_count = 0
@@ -291,17 +296,17 @@ class TelegramSummary:
         TelegramSummary.cycle_count += 1
 
         if summary["long"] == 0 and summary["short"] == 0:
-            signal_text = "Tidak ada signal valid pada sesi ini"
+            signal_text = "💡 Tidak ada signal valid pada sesi ini"
         else:
-            signal_text = f"LONG: {summary['long']}\nSHORT: {summary['short']}"
+            signal_text = f"🟢 LONG: {summary['long']}\n🔴 SHORT: {summary['short']}"
 
         text = (
-            f"SYSTEM3 v{CONFIG['version']}\n"
-            f"------------------------\n"
-            f"Cycle #{TelegramSummary.cycle_count} selesai\n"
-            f"Scanned: {summary['scanned']} pair\n"
+            f"📊 SYSTEM3 v{CONFIG['version']}\n"
+            f"━━━━━━━━━━━━━━\n"
+            f"✅ Cycle #{TelegramSummary.cycle_count} selesai\n"
+            f"🔍 Scanned: {summary['scanned']} pair\n"
             f"{signal_text}\n"
-            f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+            f"🕐 {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
         )
 
         Telegram.send(text)
@@ -317,24 +322,29 @@ class GitHubSync:
 
     @staticmethod
     def push(message="system3 update"):
-        if not GitHubSync.TOKEN:
-            print("[GIT] TOKEN missing (GITHUB_TOKEN env not set)")
-            return
-
-        if not os.path.exists(GitHubSync.REPO_PATH):
-            print("[GIT] repo path not found:", GitHubSync.REPO_PATH)
-            return
-
         try:
-            remote_url = f"https://{GitHubSync.TOKEN}@github.com/{GitHubSync.REPO}.git"
-            os.system(f"cd {GitHubSync.REPO_PATH} && git remote set-url origin {remote_url}")
-            os.system(f"cd {GitHubSync.REPO_PATH} && git add .")
-            code = os.system(f"cd {GitHubSync.REPO_PATH} && git commit -m '{message}'")
-            if code != 0:
-                print("[GIT] commit failed (maybe no changes)")
-            os.system(f"cd {GitHubSync.REPO_PATH} && git push")
+            result_add = subprocess.run(["git", "add", "."],
+                                        cwd=GitHubSync.REPO_PATH,
+                                        capture_output=True)
+
+            result_commit = subprocess.run(["git", "commit", "-m", message],
+                                            cwd=GitHubSync.REPO_PATH,
+                                            capture_output=True)
+
+            result_push = subprocess.run(["git", "push", "origin", "main"],
+                                         cwd=GitHubSync.REPO_PATH,
+                                         capture_output=True)
+
+            if result_push.returncode == 0:
+                print("✔ GITHUB PUSH SUCCESS")
+                return True
+            else:
+                print("✖ GITHUB PUSH FAILED")
+                return False
+
         except Exception as e:
-            print("[GIT ERROR]", e)
+            print("✖ GITHUB ERROR:", e)
+            return False
 
 # ═══════════════════════════════════════════════════════════════
 # INTEGRATION LAYER — Blockchain RPC
@@ -1068,8 +1078,8 @@ class System3:
         if output["direction"] == "NO TRADE":
             print(f"  ⚪ NO TRADE - {output['symbol']}")
             print(f"  Reason: {output['reason']}")
-        else:
-            emoji = "🟢" if output["direction"] == "LONG" else "🔴"
+        elif output["direction"] == "LONG":
+            emoji = "🟢"
             levels = output.get("levels", {})
 
             print(f"  {emoji} SINYAL {output['direction']} - {output['symbol']}")
@@ -1081,16 +1091,45 @@ class System3:
             print(f"  SL       : {levels.get('sl', 'N/A')}")
             print(f"  Score    : {output['final_score']}/100")
 
-        # Kirim semua sinyal (LONG, SHORT, NO TRADE)
-        msg = (
-            f"SYSTEM3 SIGNAL\n"
-            f"------------------------\n"
-            f"Pair: {output['symbol']}\n"
-            f"Type: {output['direction']}\n"
-            f"Score: {output['final_score']}\n"
-            f"Reason: {output.get('reason','')}"
-        )
-        Telegram.send(msg)
+            msg = (
+                f"🟢 *LONG SIGNAL*\n"
+                f"━━━━━━━━━━━━━━\n"
+                f"💱 Pair: {output['symbol']}\n"
+                f"💰 Entry: {levels.get('entry_price', 'N/A')}\n"
+                f"🎯 TP1: {levels.get('tp1', 'N/A')}\n"
+                f"🎯 TP2: {levels.get('tp2', 'N/A')}\n"
+                f"🎯 TP3: {levels.get('tp3', 'N/A')}\n"
+                f"🛑 SL: {levels.get('sl', 'N/A')}\n"
+                f"⚡ Score: {output['final_score']}/100\n"
+                f"📝 Reason: {output.get('reason','')}"
+            )
+            Telegram.send(msg)
+        elif output["direction"] == "SHORT":
+            emoji = "🔴"
+            levels = output.get("levels", {})
+
+            print(f"  {emoji} SINYAL {output['direction']} - {output['symbol']}")
+            print(f"  {'─'*40}")
+            print(f"  Entry    : {levels.get('entry_price', 'N/A')}")
+            print(f"  TP1      : {levels.get('tp1', 'N/A')}")
+            print(f"  TP2      : {levels.get('tp2', 'N/A')}")
+            print(f"  TP3      : {levels.get('tp3', 'N/A')}")
+            print(f"  SL       : {levels.get('sl', 'N/A')}")
+            print(f"  Score    : {output['final_score']}/100")
+
+            msg = (
+                f"🔴 *SHORT SIGNAL*\n"
+                f"━━━━━━━━━━━━━━\n"
+                f"💱 Pair: {output['symbol']}\n"
+                f"💰 Entry: {levels.get('entry_price', 'N/A')}\n"
+                f"🎯 TP1: {levels.get('tp1', 'N/A')}\n"
+                f"🎯 TP2: {levels.get('tp2', 'N/A')}\n"
+                f"🎯 TP3: {levels.get('tp3', 'N/A')}\n"
+                f"🛑 SL: {levels.get('sl', 'N/A')}\n"
+                f"⚡ Score: {output['final_score']}/100\n"
+                f"📝 Reason: {output.get('reason','')}"
+            )
+            Telegram.send(msg)
 
         print(f"{'─'*50}\n")
 
@@ -1114,9 +1153,22 @@ class System3:
 
 def flush_github():
     os.makedirs("batch", exist_ok=True)
+
     with open("batch/cycle.json", "w") as f:
         json.dump(SIGNAL_BUFFER, f, indent=2, default=str)
-    GitHubSync.push("SYSTEM3 cycle update")
+
+    git_ok = GitHubSync.push("SYSTEM3 cycle update")
+
+    telegram_ok = True
+    try:
+        telegram_ok = Telegram.send("SYSTEM3 cycle completed")
+    except:
+        telegram_ok = False
+
+    print("\n================ CHECKLIST ================")
+    print(f"✔ TELEGRAM : {'SUCCESS' if telegram_ok else 'FAILED'}")
+    print(f"✔ GITHUB   : {'SUCCESS' if git_ok else 'FAILED'}")
+    print("==========================================\n")
 
 def main():
     global SIGNAL_BUFFER
