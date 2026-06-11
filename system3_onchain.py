@@ -18,14 +18,15 @@ from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 
 # ─── Load .env file ─────────────────────────────────
-env_path = os.path.expanduser("~/System3_onchain/.env")
+env_path = os.path.join(os.getcwd(), ".env")
+
 if os.path.exists(env_path):
     with open(env_path) as f:
         for line in f:
             line = line.strip()
-            if line and not line.startswith("#") and "=" in line:
+            if line and "=" in line and not line.startswith("#"):
                 key, val = line.split("=", 1)
-                os.environ[key] = val
+                os.environ[key.strip()] = val.strip()
 
 try:
     import websocket
