@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-06-12 03:41:47",
+  "symbol": "SOLUSDT",
+  "direction": "NO TRADE",
+  "final_score": 49,
+  "price": 66.41,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.78,
+    "funding_status": "long_crowded",
+    "funding_rate": 66.41,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 35
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 32
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 30
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 88
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 91
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.17,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 103672432,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Long crowded, no long allowed"
+}
