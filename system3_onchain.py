@@ -4,7 +4,7 @@
 ║        SYSTEM3 v1.0.1 — FUTURES CORE ENGINE                ║
 ║        Derivatives-First Decision Model                    ║
 ║        STABILITY MODE — LOCKED                             ║
-║        + Trending Scanner                                  ║
+║        + Trending Scanner + EMA                            ║
 ║        Target: Termux Android | Single File                ║
 ╚══════════════════════════════════════════════════════════════╝
 """
@@ -411,7 +411,7 @@ class DataIngestion:
         return None
 
     @staticmethod
-    def fetch_klines(symbol, interval, limit=50):
+    def fetch_klines(symbol, interval, limit=100):
         url = f"{DataIngestion.BASE_URL_BINANCE}/api/v3/klines"
         r = SafeRequest.get(url, params={"symbol": symbol, "interval": interval, "limit": limit})
         if r:
@@ -653,10 +653,23 @@ class DerivativesIntelligence:
 
 
 # ═══════════════════════════════════════════════════════════════
-# 3. TIMEFRAME STRUCTURE ENGINE
+# 3. TIMEFRAME STRUCTURE ENGINE (EMA)
 # ═══════════════════════════════════════════════════════════════
 
 class TimeframeEngine:
+
+    @staticmethod
+    def calculate_ema(values, period):
+        if len(values) < period:
+            return values[-1]
+
+        multiplier = 2 / (period + 1)
+        ema = values[0]
+
+        for price in values[1:]:
+            ema = ((price - ema) * multiplier) + ema
+
+        return ema
 
     @staticmethod
     def analyze_candles(candles):
@@ -665,12 +678,12 @@ class TimeframeEngine:
 
         closes = [normalize(c["close"]) for c in candles]
 
-        sma_short = sum(closes[-5:]) / 5
-        sma_long = sum(closes[-20:]) / 20
+        ema20 = TimeframeEngine.calculate_ema(closes, 20)
+        ema50 = TimeframeEngine.calculate_ema(closes, 50)
 
-        if sma_short > sma_long * 1.005:
+        if ema20 > ema50 * 1.003:
             direction = "bullish"
-        elif sma_short < sma_long * 0.995:
+        elif ema20 < ema50 * 0.997:
             direction = "bearish"
         else:
             direction = "neutral"
@@ -1239,7 +1252,6 @@ def flush_github():
 def main():
     global SIGNAL_BUFFER
     
-    # ─── Force SSH remote ──────────────────────────
     subprocess.run(
         ["git", "remote", "set-url", "origin",
          "git@github.com:liankacur-cell/System3_onchain.git"],
@@ -1248,7 +1260,7 @@ def main():
     
     print("╔══════════════════════════════════════════════════════════╗")
     print("║   SYSTEM3 v1.0.1 — FUTURES CORE ENGINE                 ║")
-    print("║   + Trending Scanner                                   ║")
+    print("║   + Trending Scanner + EMA                             ║")
     print("╚══════════════════════════════════════════════════════════╝")
     print(f"  Start: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()
@@ -1269,7 +1281,6 @@ def main():
     while True:
         SIGNAL_BUFFER = []
         
-        # ─── Trending Scanner ──────────────────────
         if CONFIG["enable_trending_scanner"]:
             trending_pairs = TrendingScanner.get_top_trending(
                 CONFIG["trending_limit"]
