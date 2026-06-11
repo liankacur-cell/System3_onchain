@@ -260,7 +260,7 @@ class SpikeMemory:
         return sum(h["s"] > CONFIG["spike_threshold"] for h in history) >= 2
 
 # ═══════════════════════════════════════════════════════════════
-# INTEGRATION LAYER — Telegram
+# INTEGRATION LAYER — Telegram (FIXED - validate real response)
 # ═══════════════════════════════════════════════════════════════
 
 class Telegram:
@@ -271,21 +271,23 @@ class Telegram:
     def send(text):
         try:
             url = f"https://api.telegram.org/bot{Telegram.BOT_TOKEN}/sendMessage"
+
             r = requests.post(url, json={
                 "chat_id": Telegram.CHAT_ID,
-                "text": text,
-                "parse_mode": None
+                "text": text
             }, timeout=10)
 
-            if r.status_code == 200:
+            data = r.json()
+
+            if r.status_code == 200 and data.get("ok"):
                 print("✔ TELEGRAM PUSH SUCCESS")
                 return True
-            else:
-                print("✖ TELEGRAM PUSH FAILED")
-                return False
 
-        except:
-            print("✖ TELEGRAM ERROR")
+            print("✖ TELEGRAM FAILED:", data)
+            return False
+
+        except Exception as e:
+            print("✖ TELEGRAM ERROR:", e)
             return False
 
 class TelegramSummary:
@@ -312,42 +314,39 @@ class TelegramSummary:
         Telegram.send(text)
 
 # ═══════════════════════════════════════════════════════════════
-# INTEGRATION LAYER — GitHub Logger (FIXED)
+# INTEGRATION LAYER — GitHub Logger (FIXED - force token auth)
 # ═══════════════════════════════════════════════════════════════
 
 class GitHubSync:
     REPO_PATH = CONFIG["github_repo_path"]
+    TOKEN = APP_CONFIG.get("github_token")
+    REPO = APP_CONFIG["github_repo"]
 
     @staticmethod
     def push(message="system3 update"):
         try:
-            subprocess.run(["git", "add", "."],
-                           cwd=GitHubSync.REPO_PATH,
-                           capture_output=True)
+            subprocess.run(["git", "add", "."], cwd=GitHubSync.REPO_PATH)
 
-            commit = subprocess.run(["git", "commit", "-m", message],
-                                    cwd=GitHubSync.REPO_PATH,
-                                    capture_output=True,
-                                    text=True)
-
-            push = subprocess.run(["git", "push", "origin", "main"],
-                                  cwd=GitHubSync.REPO_PATH,
-                                  capture_output=True,
-                                  text=True)
-
-            commit_ok = (
-                commit.returncode == 0 or
-                "nothing to commit" in commit.stdout.lower()
+            subprocess.run(
+                ["git", "commit", "-m", message],
+                cwd=GitHubSync.REPO_PATH
             )
 
-            push_ok = push.returncode == 0
+            repo_url = f"https://{GitHubSync.TOKEN}@github.com/{GitHubSync.REPO}.git"
 
-            if push_ok:
+            result = subprocess.run(
+                ["git", "push", repo_url, "main"],
+                cwd=GitHubSync.REPO_PATH,
+                capture_output=True,
+                text=True
+            )
+
+            if result.returncode == 0:
                 print("✔ GITHUB PUSH SUCCESS")
                 return True
 
             print("✖ GITHUB PUSH FAILED")
-            print(push.stdout, push.stderr)
+            print(result.stderr)
             return False
 
         except Exception as e:
@@ -1165,13 +1164,8 @@ def flush_github():
     with open("batch/cycle.json", "w") as f:
         json.dump(SIGNAL_BUFFER, f, indent=2, default=str)
 
+    telegram_ok = Telegram.send("SYSTEM3 cycle completed")
     git_ok = GitHubSync.push("SYSTEM3 cycle update")
-
-    telegram_ok = False
-    try:
-        telegram_ok = Telegram.send("SYSTEM3 cycle completed")
-    except:
-        telegram_ok = False
 
     print("\n================ CHECKLIST ================")
     print(f"✔ TELEGRAM : {'SUCCESS' if telegram_ok else 'FAILED'}")
