@@ -14,19 +14,39 @@ import time
 import os
 import random
 import threading
+from pathlib import Path
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 
-# ─── Load .env file ─────────────────────────────────
-env_path = os.path.join(os.getcwd(), ".env")
+# ─── Load .env ─────────────────────────────────────
+def load_env():
+    env_path = Path(__file__).parent / ".env"
 
-if os.path.exists(env_path):
-    with open(env_path) as f:
-        for line in f:
-            line = line.strip()
-            if line and "=" in line and not line.startswith("#"):
-                key, val = line.split("=", 1)
-                os.environ[key.strip()] = val.strip()
+    if not env_path.exists():
+        print("[ENV] .env NOT FOUND")
+        return
+
+    print("[ENV] loading:", env_path)
+
+    for line in env_path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+
+        key, val = line.split("=", 1)
+        os.environ[key.strip()] = val.strip()
+
+load_env()
+
+# ─── Validasi Telegram ─────────────────────────────
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+
+if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
+    raise Exception("TELEGRAM ENV NOT COMPLETE")
+
+print("[TELEGRAM] BOT OK")
+print("[TELEGRAM] CHAT:", TELEGRAM_CHAT_ID)
 
 try:
     import websocket
@@ -38,8 +58,6 @@ except ImportError:
 # ═══════════════════════════════════════════════════════════════
 
 APP_CONFIG = {
-    "telegram_bot_token": os.getenv("TELEGRAM_BOT_TOKEN"),
-    "telegram_chat_id": os.getenv("TELEGRAM_CHAT_ID"),
     "github_token": os.getenv("GITHUB_TOKEN"),
     "github_repo": "liankacur-cell/System3_onchain"
 }
@@ -89,9 +107,6 @@ def normalize(x):
         return float(x)
     except:
         return 0.0
-
-def safe_float(x, default=0.0):
-    return normalize(x) if x is not None else default
 
 # ═══════════════════════════════════════════════════════════════
 # SAFE REQUEST LAYER
@@ -242,24 +257,31 @@ class SpikeMemory:
         return sum(h["s"] > CONFIG["spike_threshold"] for h in history) >= 2
 
 # ═══════════════════════════════════════════════════════════════
-# INTEGRATION LAYER — Telegram
+# INTEGRATION LAYER — Telegram (FIXED)
 # ═══════════════════════════════════════════════════════════════
 
 class Telegram:
-    BOT_TOKEN = APP_CONFIG["telegram_bot_token"]
-    CHAT_ID = APP_CONFIG["telegram_chat_id"]
-
     @staticmethod
     def send(text):
+        token = os.getenv("TELEGRAM_BOT_TOKEN")
+        chat_id = os.getenv("TELEGRAM_CHAT_ID")
+
+        if not token or not chat_id:
+            print("[TELEGRAM] SKIP - missing env")
+            return
+
+        url = f"https://api.telegram.org/bot{token}/sendMessage"
+
+        payload = {
+            "chat_id": chat_id,
+            "text": text
+        }
+
         try:
-            url = f"https://api.telegram.org/bot{Telegram.BOT_TOKEN}/sendMessage"
-            SafeRequest.post(url, json_data={
-                "chat_id": Telegram.CHAT_ID,
-                "text": text,
-                "parse_mode": None
-            })
-        except:
-            pass
+            r = requests.post(url, json=payload, timeout=10)
+            print("[TELEGRAM] SENT:", r.status_code)
+        except Exception as e:
+            print("[TELEGRAM ERROR]", e)
 
 class TelegramSummary:
     cycle_count = 0
@@ -290,11 +312,15 @@ class TelegramSummary:
 
 class GitHubSync:
     REPO_PATH = CONFIG["github_repo_path"]
-    TOKEN = APP_CONFIG["github_token"]
+    TOKEN = APP_CONFIG.get("github_token")
     REPO = APP_CONFIG["github_repo"]
 
     @staticmethod
     def push(message="system3 update"):
+        if not GitHubSync.TOKEN:
+            print("[GIT] TOKEN missing (GITHUB_TOKEN env not set)")
+            return
+
         if not os.path.exists(GitHubSync.REPO_PATH):
             print("[GIT] repo path not found:", GitHubSync.REPO_PATH)
             return
@@ -1036,12 +1062,6 @@ class System3:
         print(f"\n  → NO TRADE: {reason}")
         return output
 
-    def _send_signal_filter(self, output):
-        return (
-            output["direction"] != "NO TRADE"
-            and output["final_score"] >= CONFIG["telegram_signal_min_score"]
-        )
-
     def _display_signal(self, output):
         print(f"\n{'─'*50}")
 
@@ -1061,16 +1081,16 @@ class System3:
             print(f"  SL       : {levels.get('sl', 'N/A')}")
             print(f"  Score    : {output['final_score']}/100")
 
-        if self._send_signal_filter(output):
-            msg = (
-                f"SYSTEM3 SIGNAL\n"
-                f"------------------------\n"
-                f"Pair: {output['symbol']}\n"
-                f"Type: {output['direction']}\n"
-                f"Score: {output['final_score']}\n"
-                f"Reason: {output.get('reason','')}"
-            )
-            Telegram.send(msg)
+        # Kirim semua sinyal (LONG, SHORT, NO TRADE)
+        msg = (
+            f"SYSTEM3 SIGNAL\n"
+            f"------------------------\n"
+            f"Pair: {output['symbol']}\n"
+            f"Type: {output['direction']}\n"
+            f"Score: {output['final_score']}\n"
+            f"Reason: {output.get('reason','')}"
+        )
+        Telegram.send(msg)
 
         print(f"{'─'*50}\n")
 
