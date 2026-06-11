@@ -260,7 +260,7 @@ class SpikeMemory:
         return sum(h["s"] > CONFIG["spike_threshold"] for h in history) >= 2
 
 # ═══════════════════════════════════════════════════════════════
-# INTEGRATION LAYER — Telegram
+# INTEGRATION LAYER — Telegram (FIXED)
 # ═══════════════════════════════════════════════════════════════
 
 class Telegram:
@@ -271,13 +271,13 @@ class Telegram:
     def send(text):
         try:
             url = f"https://api.telegram.org/bot{Telegram.BOT_TOKEN}/sendMessage"
-            r = SafeRequest.post(url, json_data={
+            r = requests.post(url, json={
                 "chat_id": Telegram.CHAT_ID,
                 "text": text,
                 "parse_mode": None
-            })
+            }, timeout=10)
 
-            if r and r.status_code == 200:
+            if r.status_code == 200:
                 print("✔ TELEGRAM PUSH SUCCESS")
                 return True
             else:
