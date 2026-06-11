@@ -61,8 +61,6 @@ except ImportError:
 APP_CONFIG = {
     "telegram_bot_token": os.getenv("TELEGRAM_BOT_TOKEN"),
     "telegram_chat_id": os.getenv("TELEGRAM_CHAT_ID"),
-    "github_token": os.getenv("GITHUB_TOKEN"),
-    "github_repo": "liankacur-cell/System3_onchain"
 }
 
 CONFIG = {
@@ -260,7 +258,7 @@ class SpikeMemory:
         return sum(h["s"] > CONFIG["spike_threshold"] for h in history) >= 2
 
 # ═══════════════════════════════════════════════════════════════
-# INTEGRATION LAYER — Telegram (FIXED - validate real response)
+# INTEGRATION LAYER — Telegram
 # ═══════════════════════════════════════════════════════════════
 
 class Telegram:
@@ -314,13 +312,11 @@ class TelegramSummary:
         Telegram.send(text)
 
 # ═══════════════════════════════════════════════════════════════
-# INTEGRATION LAYER — GitHub Logger (FIXED - force token auth)
+# INTEGRATION LAYER — GitHub Logger (SSH)
 # ═══════════════════════════════════════════════════════════════
 
 class GitHubSync:
     REPO_PATH = CONFIG["github_repo_path"]
-    TOKEN = APP_CONFIG.get("github_token")
-    REPO = APP_CONFIG["github_repo"]
 
     @staticmethod
     def push(message="system3 update"):
@@ -332,10 +328,8 @@ class GitHubSync:
                 cwd=GitHubSync.REPO_PATH
             )
 
-            repo_url = f"https://{GitHubSync.TOKEN}@github.com/{GitHubSync.REPO}.git"
-
             result = subprocess.run(
-                ["git", "push", repo_url, "main"],
+                ["git", "push", "origin", "main"],
                 cwd=GitHubSync.REPO_PATH,
                 capture_output=True,
                 text=True
