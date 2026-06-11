@@ -312,7 +312,7 @@ class TelegramSummary:
         Telegram.send(text)
 
 # ═══════════════════════════════════════════════════════════════
-# INTEGRATION LAYER — GitHub Logger (SSH)
+# INTEGRATION LAYER — GitHub Logger (FIXED)
 # ═══════════════════════════════════════════════════════════════
 
 class GitHubSync:
@@ -321,26 +321,52 @@ class GitHubSync:
     @staticmethod
     def push(message="system3 update"):
         try:
-            subprocess.run(["git", "add", "."], cwd=GitHubSync.REPO_PATH)
-
-            subprocess.run(
-                ["git", "commit", "-m", message],
-                cwd=GitHubSync.REPO_PATH
+            add = subprocess.run(
+                ["git", "add", "-A"],
+                cwd=GitHubSync.REPO_PATH,
+                capture_output=True,
+                text=True
             )
+            if add.returncode != 0:
+                print("✖ GIT ADD FAILED:", add.stderr)
+                return False
 
-            result = subprocess.run(
-                ["git", "push", "origin", "main"],
+            commit = subprocess.run(
+                ["git", "commit", "-m", message],
                 cwd=GitHubSync.REPO_PATH,
                 capture_output=True,
                 text=True
             )
 
-            if result.returncode == 0:
+            commit_output = (commit.stdout + commit.stderr).lower()
+
+            if "nothing to commit" in commit_output:
+                print("ℹ No changes to commit")
+                return True
+
+            if commit.returncode != 0:
+                print("✖ GIT COMMIT FAILED:", commit.stderr)
+                return False
+
+            branch = subprocess.run(
+                ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+                cwd=GitHubSync.REPO_PATH,
+                capture_output=True,
+                text=True
+            ).stdout.strip()
+
+            push = subprocess.run(
+                ["git", "push", "origin", branch],
+                cwd=GitHubSync.REPO_PATH,
+                capture_output=True,
+                text=True
+            )
+
+            if push.returncode == 0:
                 print("✔ GITHUB PUSH SUCCESS")
                 return True
 
-            print("✖ GITHUB PUSH FAILED")
-            print(result.stderr)
+            print("✖ GITHUB PUSH FAILED:", push.stderr)
             return False
 
         except Exception as e:
