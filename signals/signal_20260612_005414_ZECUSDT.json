@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-06-12 00:53:57",
+  "symbol": "ZECUSDT",
+  "direction": "NO TRADE",
+  "final_score": 40,
+  "price": 431.18,
+  "derivatives": {
+    "oi_trend": "rising_bullish",
+    "oi_change_pct": 3.91,
+    "funding_status": "long_crowded",
+    "funding_rate": 431.18,
+    "risk_level": "medium",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 55
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "15m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 30
+    },
+    "1h": {
+      "direction": "neutral",
+      "strength": 50
+    }
+  },
+  "volatility": {
+    "state": "high",
+    "volatility_ratio": 2.11,
+    "block": false,
+    "score": 40
+  },
+  "rpc": {
+    "block": 103650091,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Dead zone lock"
+}

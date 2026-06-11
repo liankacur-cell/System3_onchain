@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-06-12 00:53:57",
+  "symbol": "ETHUSDT",
+  "direction": "NO TRADE",
+  "final_score": 41,
+  "price": 1683.49,
+  "derivatives": {
+    "oi_trend": "rising_bullish",
+    "oi_change_pct": 2.78,
+    "funding_status": "long_crowded",
+    "funding_rate": 1683.49,
+    "risk_level": "medium",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 55
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "1h": {
+      "direction": "neutral",
+      "strength": 50
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.97,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 103650061,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Dead zone lock"
+}

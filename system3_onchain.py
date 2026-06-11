@@ -312,7 +312,7 @@ class TelegramSummary:
         Telegram.send(text)
 
 # ═══════════════════════════════════════════════════════════════
-# INTEGRATION LAYER — GitHub Logger (FIXED)
+# INTEGRATION LAYER — GitHub Logger (FINAL FIX)
 # ═══════════════════════════════════════════════════════════════
 
 class GitHubSync:
@@ -321,15 +321,7 @@ class GitHubSync:
     @staticmethod
     def push(message="system3 update"):
         try:
-            add = subprocess.run(
-                ["git", "add", "-A"],
-                cwd=GitHubSync.REPO_PATH,
-                capture_output=True,
-                text=True
-            )
-            if add.returncode != 0:
-                print("✖ GIT ADD FAILED:", add.stderr)
-                return False
+            subprocess.run(["git", "add", "-A"], cwd=GitHubSync.REPO_PATH, check=True)
 
             commit = subprocess.run(
                 ["git", "commit", "-m", message],
@@ -338,39 +330,30 @@ class GitHubSync:
                 text=True
             )
 
-            commit_output = (commit.stdout + commit.stderr).lower()
+            if "nothing to commit" in commit.stdout.lower():
+                print("[GIT] nothing to commit, skipping commit step")
 
-            if "nothing to commit" in commit_output:
-                print("ℹ No changes to commit")
-                return True
+            print("[GIT] pushing via SSH...")
 
-            if commit.returncode != 0:
-                print("✖ GIT COMMIT FAILED:", commit.stderr)
-                return False
-
-            branch = subprocess.run(
-                ["git", "rev-parse", "--abbrev-ref", "HEAD"],
-                cwd=GitHubSync.REPO_PATH,
-                capture_output=True,
-                text=True
-            ).stdout.strip()
-
-            push = subprocess.run(
-                ["git", "push", "origin", branch],
+            result = subprocess.run(
+                ["git", "push", "origin", "main"],
                 cwd=GitHubSync.REPO_PATH,
                 capture_output=True,
                 text=True
             )
 
-            if push.returncode == 0:
+            print("[GIT STDOUT]", result.stdout)
+            print("[GIT STDERR]", result.stderr)
+
+            if result.returncode == 0:
                 print("✔ GITHUB PUSH SUCCESS")
                 return True
 
-            print("✖ GITHUB PUSH FAILED:", push.stderr)
+            print("✖ GITHUB PUSH FAILED")
             return False
 
-        except Exception as e:
-            print("✖ GITHUB ERROR:", e)
+        except subprocess.CalledProcessError as e:
+            print("✖ GIT ERROR:", str(e))
             return False
 
 # ═══════════════════════════════════════════════════════════════
@@ -1194,6 +1177,13 @@ def flush_github():
 
 def main():
     global SIGNAL_BUFFER
+    
+    # ─── Force SSH remote ──────────────────────────
+    subprocess.run(
+        ["git", "remote", "set-url", "origin",
+         "git@github.com:liankacur-cell/System3_onchain.git"],
+        cwd=CONFIG["github_repo_path"]
+    )
     
     print("╔══════════════════════════════════════════════════════════╗")
     print("║   SYSTEM3 v1.0.1 — FUTURES CORE ENGINE                 ║")
