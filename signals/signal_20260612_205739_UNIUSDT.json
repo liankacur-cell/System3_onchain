@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-06-12 20:57:02",
+  "symbol": "UNIUSDT",
+  "direction": "NO TRADE",
+  "final_score": 43,
+  "price": 2.507,
+  "derivatives": {
+    "oi_trend": "rising_bullish",
+    "oi_change_pct": 748002708.54,
+    "funding_status": "neutral",
+    "funding_rate": 0.0056,
+    "risk_level": "high",
+    "derivatives_signal": "bullish",
+    "crowd_trap": false,
+    "score": 60
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 30
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 68
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.87,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 103810352,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "OI spike long trap risk"
+}

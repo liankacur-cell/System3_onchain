@@ -4,7 +4,7 @@
 ║        SYSTEM3 v1.0.1 — FUTURES CORE ENGINE                ║
 ║        Derivatives-First Decision Model                    ║
 ║        STABILITY MODE — LOCKED                             ║
-║        + Trending Scanner + EMA                            ║
+║        + Adaptive Decision (Penalty-Based)                 ║
 ║        Target: Termux Android | Single File                ║
 ╚══════════════════════════════════════════════════════════════╝
 """
@@ -809,61 +809,77 @@ class ConfluenceScoring:
 
 
 # ═══════════════════════════════════════════════════════════════
-# 6. DECISION ENGINE (3-Layer)
+# 6. DECISION ENGINE (ADAPTIVE PENALTY SYSTEM)
 # ═══════════════════════════════════════════════════════════════
 
 class DecisionEngine:
 
     @staticmethod
-    def decide(final_score, raw_score, tf_1h_direction, derivatives, volatility_block):
+    def decide(final_score, raw_score, tf_1h_direction, derivatives, volatility_block, spike_detected, structure_score):
         
+        # Absolute blocks (tetap dipertahankan untuk keamanan)
         if volatility_block:
-            return "NO TRADE", "Extreme volatility block"
+            return "NO TRADE", "Extreme volatility block", final_score
         
         if derivatives["crowd_trap"]:
-            return "NO TRADE", "Crowd trap detected"
+            return "NO TRADE", "Crowd trap detected", final_score
         
-        if CONFIG["dead_zone_low"] <= raw_score <= CONFIG["dead_zone_high"]:
-            return "NO TRADE", "Dead zone lock"
-        
+        # ─── SOLUSI 1: Funding crowded → penalty, bukan block ───
         funding_status = derivatives["funding_status"]
         oi_change_pct = derivatives["oi_change_pct"]
         risk_level = derivatives["risk_level"]
         
         if funding_status == "long_crowded":
-            if tf_1h_direction != "bearish" or final_score < 70:
-                return "NO TRADE", "Long crowded, no long allowed"
+            if tf_1h_direction == "bearish" and final_score >= 65:
+                final_score -= 8  # Peluang kontrarian tetap dibuka
+            else:
+                final_score -= 15  # Penalti lebih berat jika tidak searah
         
         if funding_status == "short_crowded":
-            if tf_1h_direction != "bullish" or final_score < 70:
-                return "NO TRADE", "Short crowded, no short allowed"
+            if tf_1h_direction == "bullish" and final_score >= 65:
+                final_score -= 8
+            else:
+                final_score -= 15
         
+        # ─── SOLUSI 3: Spike → context filter ───
+        if spike_detected:
+            if structure_score > 70:
+                final_score -= 10  # Breakout valid, penalti ringan
+            else:
+                final_score -= 20  # Noise spike, penalti berat
+        
+        # ─── SOLUSI 2: Dead zone → penalty, bukan block ───
+        if CONFIG["dead_zone_low"] <= raw_score <= CONFIG["dead_zone_high"]:
+            final_score = int(final_score * 0.92)  # Kurangi 8%
+        
+        # ─── OI trap tetap jadi block (risiko tinggi) ───
         if oi_change_pct > 5 and tf_1h_direction == "bullish":
-            return "NO TRADE", "OI spike long trap risk"
+            return "NO TRADE", "OI spike long trap risk", final_score
         
         if oi_change_pct < -5 and tf_1h_direction == "bearish":
-            return "NO TRADE", "OI drop short trap risk"
+            return "NO TRADE", "OI drop short trap risk", final_score
         
-        if risk_level == "high" and final_score < 80:
-            return "NO TRADE", "High risk, score insufficient"
+        if risk_level == "high" and final_score < 70:
+            return "NO TRADE", "High risk, score insufficient", final_score
         
+        # ─── Score evaluation ───
         if final_score < CONFIG["score_threshold_weak"]:
-            return "NO TRADE", f"Score rendah ({final_score})"
+            return "NO TRADE", f"Score rendah ({final_score})", final_score
         
         if final_score < CONFIG["score_threshold_strong"]:
-            return "NO TRADE", f"Sinyal lemah ({final_score})"
+            return "NO TRADE", f"Sinyal lemah ({final_score})", final_score
         
         if tf_1h_direction == "neutral":
-            return "NO TRADE", "TF 1H neutral"
+            return "NO TRADE", "TF 1H neutral", final_score
         
         if tf_1h_direction == "bullish":
             direction = "LONG"
         elif tf_1h_direction == "bearish":
             direction = "SHORT"
         else:
-            return "NO TRADE", "Arah tidak jelas"
+            return "NO TRADE", "Arah tidak jelas", final_score
         
-        return direction, f"Confirmed ({final_score})"
+        return direction, f"Confirmed ({final_score})", final_score
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -986,6 +1002,7 @@ class System3:
     def __init__(self):
         self.timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.state = {}
+        self.cycle_best = []  # Untuk entry guarantee layer
 
     def get_state(self, symbol):
         if symbol not in self.state:
@@ -1026,9 +1043,6 @@ class System3:
         spike, spike_score = MarketFilter.spike_check(symbol, ticker, klines["1h"])
         print(f"    Spike Score: {spike_score:.2f}")
         
-        if spike:
-            return self._no_trade(f"SPIKE BLOCK {spike_score:.2f}", symbol)
-
         oi_sekarang = DataGateway.get(symbol, DataIngestion.fetch_open_interest)
         if oi_sekarang is None:
             return self._no_trade("ERROR: OI fetch failed", symbol)
@@ -1081,25 +1095,31 @@ class System3:
         print(f"    Raw: {raw_score} | Smoothed: {final_score}")
 
         print("\n[6] DECISION ENGINE...")
-        direction, reason = DecisionEngine.decide(
+        direction, reason, adjusted_score = DecisionEngine.decide(
             final_score=final_score,
             raw_score=raw_score,
             tf_1h_direction=tf_results["1h"]["direction"],
             derivatives=deriv,
             volatility_block=vol["block"],
+            spike_detected=spike,
+            structure_score=structure_score,
         )
 
         if state["last_decision"] is not None:
             age_decay = time.time() - state.get("last_time", 0)
-            if abs(final_score - state["last_score"]) < CONFIG["override_max_score_change"] and age_decay < 900:
+            if abs(adjusted_score - state["last_score"]) < CONFIG["override_max_score_change"] and age_decay < 900:
                 direction = state["last_decision"]
                 reason = "STABLE OVERRIDE"
 
-        state["last_score"] = final_score
+        state["last_score"] = adjusted_score
         state["last_decision"] = direction
         state["last_time"] = time.time()
 
         print(f"    DECISION: {direction} | Reason: {reason}")
+
+        # ─── Entry guarantee layer ───
+        if direction == "NO TRADE" and adjusted_score >= 55:
+            self.cycle_best.append((symbol, adjusted_score, tf_results["1h"]["direction"], reason))
 
         if direction in ["LONG", "SHORT"]:
             print("\n[7] RISK & TP/SL ENGINE...")
@@ -1121,7 +1141,7 @@ class System3:
             "timestamp": self.timestamp,
             "symbol": symbol,
             "direction": direction,
-            "final_score": final_score,
+            "final_score": adjusted_score,
             "price": ticker["last_price"],
             "derivatives": deriv,
             "tf_results": {tf: {"direction": r["direction"], "strength": r["strength"]}
@@ -1230,6 +1250,19 @@ class System3:
             json.dump(output, f, indent=2, default=str)
         print(f"  [SAVED] {filename}")
 
+    def get_best_fallback(self):
+        """SOLUSI 4: Entry guarantee layer - pilih pair terbaik jika semua NO TRADE"""
+        if not self.cycle_best:
+            return None
+        
+        # Sort by score descending
+        self.cycle_best.sort(key=lambda x: x[1], reverse=True)
+        best = self.cycle_best[0]
+        
+        if best[1] >= 55 and best[2] != "neutral":
+            return best
+        return None
+
 
 # ═══════════════════════════════════════════════════════════════
 # 10. MAIN EXECUTION LOOP
@@ -1260,7 +1293,7 @@ def main():
     
     print("╔══════════════════════════════════════════════════════════╗")
     print("║   SYSTEM3 v1.0.1 — FUTURES CORE ENGINE                 ║")
-    print("║   + Trending Scanner + EMA                             ║")
+    print("║   + Adaptive Decision (Penalty-Based)                  ║")
     print("╚══════════════════════════════════════════════════════════╝")
     print(f"  Start: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()
@@ -1288,14 +1321,15 @@ def main():
         else:
             trending_pairs = []
         
+        # ─── SOLUSI 5: Trending dibatasi 10 pair ───
         scan_pairs = list(
             dict.fromkeys(
-                PAIR_UNIVERSE_CORE + trending_pairs
+                PAIR_UNIVERSE_CORE + trending_pairs[:10]
             )
         )
         
-        print("\nTRENDING PAIRS:")
-        print(trending_pairs)
+        print("\nTRENDING PAIRS (top 10):")
+        print(trending_pairs[:10])
         
         system3 = System3()
         total_signals = 0
@@ -1319,6 +1353,27 @@ def main():
                 time.sleep(1)
             except Exception as e:
                 print(f"  [ERROR] {symbol}: {e}")
+
+        # ─── SOLUSI 4: Entry guarantee layer ───
+        if long_count == 0 and short_count == 0:
+            fallback = system3.get_best_fallback()
+            if fallback:
+                symbol, score, direction, reason = fallback
+                print(f"\n⚠️ NO SIGNAL - FALLBACK: {direction} {symbol} (score: {score})")
+                # Kirim sebagai sinyal fallback
+                msg = (
+                    f"⚠️ *FALLBACK SIGNAL*\n"
+                    f"━━━━━━━━━━━━━━\n"
+                    f"💱 Pair: {symbol}\n"
+                    f"📊 Type: {direction}\n"
+                    f"⚡ Score: {score}\n"
+                    f"📝 Reason: Best available ({reason})"
+                )
+                Telegram.send(msg)
+                if direction == "LONG":
+                    long_count += 1
+                else:
+                    short_count += 1
 
         cycle_summary = {
             "scanned": total_signals,
