@@ -4,7 +4,8 @@
 ║        SYSTEM3 v1.0.1 — FUTURES CORE ENGINE                ║
 ║        Derivatives-First Decision Model                    ║
 ║        STABILITY MODE — LOCKED                             ║
-║        + Adaptive Decision + Score Rebalance               ║
+║        + Score Rebalance + Probabilistic Decision          ║
+║        + Universe Fix + Threshold Calibration              ║
 ║        Target: Termux Android | Single File                ║
 ╚══════════════════════════════════════════════════════════════╝
 """
@@ -72,14 +73,14 @@ CONFIG = {
     "sl_long": 5,
     "tp_short": [3, 6, 10],
     "sl_short": 5,
-    "score_threshold_strong": 62,
-    "score_threshold_weak": 45,
+    "score_threshold_strong": 58,
+    "score_threshold_weak": 40,
     "archive_retention_days": 90,
     "min_volume_24h": 1_000_000,
     "dead_zone_low": 48,
     "dead_zone_high": 52,
     "override_max_score_change": 5,
-    "telegram_signal_min_score": 62,
+    "telegram_signal_min_score": 58,
     "cache_ttl_seconds": 2,
     "spike_threshold": 6,
     "github_repo_path": os.path.expanduser("~/System3_onchain"),
@@ -93,7 +94,8 @@ CYCLE_INTERVAL = CONFIG["cycle_minutes"] * 60
 
 PAIR_UNIVERSE_CORE = [
     "BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT",
-    "SUIUSDT", "DOGEUSDT", "UNIUSDT", "ZECUSDT"
+    "DOGEUSDT", "ADAUSDT", "AVAXUSDT", "ARBUSDT", "INJUSDT",
+    "APTUSDT", "OPUSDT", "NEARUSDT"
 ]
 
 SIGNAL_BUFFER = []
@@ -119,16 +121,25 @@ def normalize(x):
 # ═══════════════════════════════════════════════════════════════
 
 def score_to_probability(score):
-    if score < 45:
-        return 0.30
-    elif score < 55:
-        return 0.45
-    elif score < 62:
-        return 0.58
-    elif score < 70:
-        return 0.66
+    if score < 40:
+        return 0.25
+    elif score < 50:
+        return 0.40
+    elif score < 58:
+        return 0.55
+    elif score < 65:
+        return 0.65
     else:
         return 0.75
+
+# ═══════════════════════════════════════════════════════════════
+# SYMBOL FILTER
+# ═══════════════════════════════════════════════════════════════
+
+class SymbolFilter:
+    @staticmethod
+    def is_valid(symbol):
+        return symbol.endswith("USDT") and len(symbol) <= 12
 
 # ═══════════════════════════════════════════════════════════════
 # SAFE REQUEST LAYER
@@ -564,14 +575,14 @@ class MarketFilter:
 
         score = price_move * 0.6 + vol * 0.4
 
-        if score > CONFIG["spike_threshold"]:
+        if score > CONFIG["spike_threshold"] and score < 15:
             SpikeMemory.update(symbol, score)
             return True, score
 
         return False, score
 
 # ═══════════════════════════════════════════════════════════════
-# 2. DERIVATIVES INTELLIGENCE (REBALANCED)
+# 2. DERIVATIVES INTELLIGENCE (CALIBRATED)
 # ═══════════════════════════════════════════════════════════════
 
 class DerivativesIntelligence:
@@ -631,8 +642,7 @@ class DerivativesIntelligence:
             derivatives_signal = "neutral"
             crowd_trap = True
         
-        # ─── REBALANCED SCORING ─────────────────────
-        score = 55  # Baseline naik dari 50
+        score = 55
         
         if oi_trend == "rising_bullish":
             score += 15
@@ -645,15 +655,15 @@ class DerivativesIntelligence:
                 score += 8
         
         if funding_status == "long_crowded":
-            score -= 10
+            score -= 6
         elif funding_status == "short_crowded":
-            score += 10
+            score += 6
         
         if risk_level == "high":
             score -= 8
         
         if crowd_trap:
-            score -= 20
+            score -= 10
         
         score = max(0, min(100, score))
         
@@ -809,7 +819,7 @@ class VolatilityFilter:
 
 
 # ═══════════════════════════════════════════════════════════════
-# 5. CONFLUENCE SCORING (REBALANCED)
+# 5. CONFLUENCE SCORING
 # ═══════════════════════════════════════════════════════════════
 
 class ConfluenceScoring:
@@ -826,7 +836,7 @@ class ConfluenceScoring:
 
 
 # ═══════════════════════════════════════════════════════════════
-# 6. DECISION ENGINE (PROBABILISTIC BAND)
+# 6. DECISION ENGINE (CALIBRATED)
 # ═══════════════════════════════════════════════════════════════
 
 class DecisionEngine:
@@ -844,48 +854,45 @@ class DecisionEngine:
         oi_change_pct = derivatives["oi_change_pct"]
         risk_level = derivatives["risk_level"]
         
-        # ─── Penalty system ───
         if funding_status == "long_crowded":
-            if tf_1h_direction == "bearish" and final_score >= 60:
-                final_score -= 8
+            if tf_1h_direction == "bearish" and final_score >= 55:
+                final_score -= 6
             else:
-                final_score -= 12
+                final_score -= 10
         
         if funding_status == "short_crowded":
-            if tf_1h_direction == "bullish" and final_score >= 60:
-                final_score -= 8
+            if tf_1h_direction == "bullish" and final_score >= 55:
+                final_score -= 6
             else:
-                final_score -= 12
+                final_score -= 10
         
         if spike_detected:
             if structure_score > 70:
-                final_score -= 10
+                final_score -= 8
             else:
-                final_score -= 20
+                final_score -= 15
         
         if CONFIG["dead_zone_low"] <= raw_score <= CONFIG["dead_zone_high"]:
             final_score = int(final_score * 0.92)
         
-        # ─── OI trap tetap hard block ───
         if oi_change_pct > 5 and tf_1h_direction == "bullish":
             return "NO TRADE", "OI spike long trap risk", final_score, 0.0
         
         if oi_change_pct < -5 and tf_1h_direction == "bearish":
             return "NO TRADE", "OI drop short trap risk", final_score, 0.0
         
-        if risk_level == "high" and final_score < 60:
+        if risk_level == "high" and final_score < 55:
             return "NO TRADE", "High risk, score insufficient", final_score, 0.0
         
-        # ─── PROBABILISTIC BAND ───
         prob = score_to_probability(final_score)
         
-        if final_score < 45:
+        if final_score < 40:
             return "NO TRADE", f"Low probability zone ({final_score})", final_score, prob
         
-        if final_score < 55:
+        if final_score < 50:
             return "WATCH", f"Marginal setup ({final_score})", final_score, prob
         
-        if final_score < 62:
+        if final_score < 58:
             if tf_1h_direction == "bullish":
                 direction = "WEAK LONG"
             elif tf_1h_direction == "bearish":
@@ -1130,6 +1137,11 @@ class System3:
             structure_score=structure_score,
         )
 
+        # ─── Opportunity floor override ────────────────
+        if adjusted_score >= 55 and direction == "NO TRADE":
+            direction = "WATCH"
+            reason = "Opportunity floor override"
+
         if state["last_decision"] is not None:
             age_decay = time.time() - state.get("last_time", 0)
             if abs(adjusted_score - state["last_score"]) < CONFIG["override_max_score_change"] and age_decay < 900:
@@ -1322,7 +1334,7 @@ def main():
     
     print("╔══════════════════════════════════════════════════════════╗")
     print("║   SYSTEM3 v1.0.1 — FUTURES CORE ENGINE                 ║")
-    print("║   + Score Rebalance + Probabilistic Decision           ║")
+    print("║   + Calibrated Threshold + Universe Fix                ║")
     print("╚══════════════════════════════════════════════════════════╝")
     print(f"  Start: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()
@@ -1355,6 +1367,12 @@ def main():
                 PAIR_UNIVERSE_CORE + trending_pairs[:10]
             )
         )
+        
+        # ─── Filter symbol valid ────────────────────
+        scan_pairs = [
+            s for s in scan_pairs
+            if SymbolFilter.is_valid(s)
+        ]
         
         print("\nTRENDING PAIRS (top 10):")
         print(trending_pairs[:10])
