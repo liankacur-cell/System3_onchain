@@ -4,8 +4,8 @@
 ║        SYSTEM3 v1.0.1 — FUTURES CORE ENGINE                ║
 ║        Derivatives-First Decision Model                    ║
 ║        STABILITY MODE — LOCKED                             ║
-║        + Score Rebalance + Probabilistic Decision          ║
-║        + Universe Fix + Threshold Calibration              ║
+║        + Calibrated Threshold + Universe Fix               ║
+║        + 3-Layer Summary                                  ║
 ║        Target: Termux Android | Single File                ║
 ╚══════════════════════════════════════════════════════════════╝
 """
@@ -327,10 +327,18 @@ class TelegramSummary:
     def send(summary):
         TelegramSummary.cycle_count += 1
 
-        if summary["long"] == 0 and summary["short"] == 0:
-            signal_text = "💡 Tidak ada signal valid pada sesi ini"
+        strong_total = summary["long"] + summary["short"]
+        weak_total = summary.get("weak_long", 0) + summary.get("weak_short", 0)
+        watch_total = summary.get("watch", 0)
+
+        if strong_total == 0 and weak_total == 0:
+            signal_text = "💡 Tidak ada STRONG signal (LONG/SHORT), hanya weak setups" if watch_total > 0 else "💡 Tidak ada signal valid pada sesi ini"
         else:
             signal_text = f"🟢 LONG: {summary['long']}\n🔴 SHORT: {summary['short']}"
+            if weak_total > 0:
+                signal_text += f"\n🟡 WEAK LONG: {summary.get('weak_long', 0)}\n🟠 WEAK SHORT: {summary.get('weak_short', 0)}"
+            if watch_total > 0:
+                signal_text += f"\n👁 WATCH: {watch_total}"
 
         text = (
             f"📊 SYSTEM3 v{CONFIG['version']}\n"
@@ -1137,7 +1145,6 @@ class System3:
             structure_score=structure_score,
         )
 
-        # ─── Opportunity floor override ────────────────
         if adjusted_score >= 55 and direction == "NO TRADE":
             direction = "WATCH"
             reason = "Opportunity floor override"
@@ -1306,7 +1313,7 @@ class System3:
 
 
 # ═══════════════════════════════════════════════════════════════
-# 10. MAIN EXECUTION LOOP
+# 10. MAIN EXECUTION LOOP (3-LAYER SUMMARY)
 # ═══════════════════════════════════════════════════════════════
 
 def flush_github():
@@ -1334,7 +1341,7 @@ def main():
     
     print("╔══════════════════════════════════════════════════════════╗")
     print("║   SYSTEM3 v1.0.1 — FUTURES CORE ENGINE                 ║")
-    print("║   + Calibrated Threshold + Universe Fix                ║")
+    print("║   + 3-Layer Summary                                   ║")
     print("╚══════════════════════════════════════════════════════════╝")
     print(f"  Start: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()
@@ -1368,7 +1375,6 @@ def main():
             )
         )
         
-        # ─── Filter symbol valid ────────────────────
         scan_pairs = [
             s for s in scan_pairs
             if SymbolFilter.is_valid(s)
@@ -1379,8 +1385,8 @@ def main():
         
         system3 = System3()
         total_signals = 0
-        long_count = 0
-        short_count = 0
+        strong_long = 0
+        strong_short = 0
         weak_long_count = 0
         weak_short_count = 0
         watch_count = 0
@@ -1395,9 +1401,9 @@ def main():
                 total_signals += 1
                 d = result["direction"]
                 if d == "LONG":
-                    long_count += 1
+                    strong_long += 1
                 elif d == "SHORT":
-                    short_count += 1
+                    strong_short += 1
                 elif d == "WEAK LONG":
                     weak_long_count += 1
                 elif d == "WEAK SHORT":
@@ -1410,11 +1416,11 @@ def main():
             except Exception as e:
                 print(f"  [ERROR] {symbol}: {e}")
 
-        if long_count == 0 and short_count == 0:
+        if strong_long == 0 and strong_short == 0:
             fallback = system3.get_best_fallback()
             if fallback:
                 symbol, score, direction, reason = fallback
-                print(f"\n⚠️ NO SIGNAL - FALLBACK: {direction} {symbol} (score: {score})")
+                print(f"\n⚠️ NO STRONG SIGNAL - FALLBACK: {direction} {symbol} (score: {score})")
                 msg = (
                     f"⚠️ *FALLBACK SIGNAL*\n"
                     f"━━━━━━━━━━━━━━\n"
@@ -1425,25 +1431,28 @@ def main():
                 )
                 Telegram.send(msg)
                 if direction == "LONG":
-                    long_count += 1
+                    strong_long += 1
                 else:
-                    short_count += 1
+                    strong_short += 1
 
         cycle_summary = {
             "scanned": total_signals,
-            "long": long_count,
-            "short": short_count,
+            "long": strong_long,
+            "short": strong_short,
+            "weak_long": weak_long_count,
+            "weak_short": weak_short_count,
+            "watch": watch_count,
         }
 
         print("\n" + "="*60)
         print("  CYCLE COMPLETE")
         print("="*60)
-        print(f"  LONG       : {long_count}")
-        print(f"  SHORT      : {short_count}")
-        print(f"  WEAK LONG  : {weak_long_count}")
-        print(f"  WEAK SHORT : {weak_short_count}")
-        print(f"  WATCH      : {watch_count}")
-        print(f"  NO TRADE   : {no_trade_count}")
+        print(f"  STRONG LONG : {strong_long}")
+        print(f"  STRONG SHORT: {strong_short}")
+        print(f"  WEAK LONG   : {weak_long_count}")
+        print(f"  WEAK SHORT  : {weak_short_count}")
+        print(f"  WATCH       : {watch_count}")
+        print(f"  NO TRADE    : {no_trade_count}")
         print("="*60)
 
         TelegramSummary.send(cycle_summary)
