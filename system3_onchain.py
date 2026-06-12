@@ -4,7 +4,7 @@
 ║        SYSTEM3 v1.0.1 — FUTURES CORE ENGINE                ║
 ║        Derivatives-First Decision Model                    ║
 ║        STABILITY MODE — LOCKED                             ║
-║        + Adaptive Decision (Penalty-Based)                 ║
+║        + Adaptive Decision + Score Rebalance               ║
 ║        Target: Termux Android | Single File                ║
 ╚══════════════════════════════════════════════════════════════╝
 """
@@ -72,14 +72,14 @@ CONFIG = {
     "sl_long": 5,
     "tp_short": [3, 6, 10],
     "sl_short": 5,
-    "score_threshold_strong": 75,
-    "score_threshold_weak": 50,
+    "score_threshold_strong": 62,
+    "score_threshold_weak": 45,
     "archive_retention_days": 90,
     "min_volume_24h": 1_000_000,
     "dead_zone_low": 48,
     "dead_zone_high": 52,
     "override_max_score_change": 5,
-    "telegram_signal_min_score": 70,
+    "telegram_signal_min_score": 62,
     "cache_ttl_seconds": 2,
     "spike_threshold": 6,
     "github_repo_path": os.path.expanduser("~/System3_onchain"),
@@ -113,6 +113,22 @@ def normalize(x):
         return float(x)
     except:
         return 0.0
+
+# ═══════════════════════════════════════════════════════════════
+# PROBABILITY MAPPER
+# ═══════════════════════════════════════════════════════════════
+
+def score_to_probability(score):
+    if score < 45:
+        return 0.30
+    elif score < 55:
+        return 0.45
+    elif score < 62:
+        return 0.58
+    elif score < 70:
+        return 0.66
+    else:
+        return 0.75
 
 # ═══════════════════════════════════════════════════════════════
 # SAFE REQUEST LAYER
@@ -555,7 +571,7 @@ class MarketFilter:
         return False, score
 
 # ═══════════════════════════════════════════════════════════════
-# 2. DERIVATIVES INTELLIGENCE
+# 2. DERIVATIVES INTELLIGENCE (REBALANCED)
 # ═══════════════════════════════════════════════════════════════
 
 class DerivativesIntelligence:
@@ -615,25 +631,26 @@ class DerivativesIntelligence:
             derivatives_signal = "neutral"
             crowd_trap = True
         
-        score = 50
+        # ─── REBALANCED SCORING ─────────────────────
+        score = 55  # Baseline naik dari 50
         
         if oi_trend == "rising_bullish":
-            score += 20
+            score += 15
         elif oi_trend == "rising_bearish":
-            score -= 20
+            score -= 15
         elif oi_trend == "declining":
             if price_change_pct > 0:
-                score -= 10
+                score -= 8
             else:
-                score += 10
+                score += 8
         
         if funding_status == "long_crowded":
-            score -= 15
+            score -= 10
         elif funding_status == "short_crowded":
-            score += 15
+            score += 10
         
         if risk_level == "high":
-            score -= 10
+            score -= 8
         
         if crowd_trap:
             score -= 20
@@ -792,7 +809,7 @@ class VolatilityFilter:
 
 
 # ═══════════════════════════════════════════════════════════════
-# 5. CONFLUENCE SCORING
+# 5. CONFLUENCE SCORING (REBALANCED)
 # ═══════════════════════════════════════════════════════════════
 
 class ConfluenceScoring:
@@ -800,8 +817,8 @@ class ConfluenceScoring:
     @staticmethod
     def calculate(derivatives_score, structure_score, volatility_score):
         final = (
-            normalize(derivatives_score) * 0.45
-            + normalize(structure_score) * 0.40
+            normalize(derivatives_score) * 0.35
+            + normalize(structure_score) * 0.50
             + normalize(volatility_score) * 0.15
         )
         final = max(0, min(100, final))
@@ -809,7 +826,7 @@ class ConfluenceScoring:
 
 
 # ═══════════════════════════════════════════════════════════════
-# 6. DECISION ENGINE (ADAPTIVE PENALTY SYSTEM)
+# 6. DECISION ENGINE (PROBABILISTIC BAND)
 # ═══════════════════════════════════════════════════════════════
 
 class DecisionEngine:
@@ -817,69 +834,77 @@ class DecisionEngine:
     @staticmethod
     def decide(final_score, raw_score, tf_1h_direction, derivatives, volatility_block, spike_detected, structure_score):
         
-        # Absolute blocks (tetap dipertahankan untuk keamanan)
         if volatility_block:
-            return "NO TRADE", "Extreme volatility block", final_score
+            return "NO TRADE", "Extreme volatility block", final_score, 0.0
         
         if derivatives["crowd_trap"]:
-            return "NO TRADE", "Crowd trap detected", final_score
+            return "NO TRADE", "Crowd trap detected", final_score, 0.0
         
-        # ─── SOLUSI 1: Funding crowded → penalty, bukan block ───
         funding_status = derivatives["funding_status"]
         oi_change_pct = derivatives["oi_change_pct"]
         risk_level = derivatives["risk_level"]
         
+        # ─── Penalty system ───
         if funding_status == "long_crowded":
-            if tf_1h_direction == "bearish" and final_score >= 65:
-                final_score -= 8  # Peluang kontrarian tetap dibuka
-            else:
-                final_score -= 15  # Penalti lebih berat jika tidak searah
-        
-        if funding_status == "short_crowded":
-            if tf_1h_direction == "bullish" and final_score >= 65:
+            if tf_1h_direction == "bearish" and final_score >= 60:
                 final_score -= 8
             else:
-                final_score -= 15
+                final_score -= 12
         
-        # ─── SOLUSI 3: Spike → context filter ───
+        if funding_status == "short_crowded":
+            if tf_1h_direction == "bullish" and final_score >= 60:
+                final_score -= 8
+            else:
+                final_score -= 12
+        
         if spike_detected:
             if structure_score > 70:
-                final_score -= 10  # Breakout valid, penalti ringan
+                final_score -= 10
             else:
-                final_score -= 20  # Noise spike, penalti berat
+                final_score -= 20
         
-        # ─── SOLUSI 2: Dead zone → penalty, bukan block ───
         if CONFIG["dead_zone_low"] <= raw_score <= CONFIG["dead_zone_high"]:
-            final_score = int(final_score * 0.92)  # Kurangi 8%
+            final_score = int(final_score * 0.92)
         
-        # ─── OI trap tetap jadi block (risiko tinggi) ───
+        # ─── OI trap tetap hard block ───
         if oi_change_pct > 5 and tf_1h_direction == "bullish":
-            return "NO TRADE", "OI spike long trap risk", final_score
+            return "NO TRADE", "OI spike long trap risk", final_score, 0.0
         
         if oi_change_pct < -5 and tf_1h_direction == "bearish":
-            return "NO TRADE", "OI drop short trap risk", final_score
+            return "NO TRADE", "OI drop short trap risk", final_score, 0.0
         
-        if risk_level == "high" and final_score < 70:
-            return "NO TRADE", "High risk, score insufficient", final_score
+        if risk_level == "high" and final_score < 60:
+            return "NO TRADE", "High risk, score insufficient", final_score, 0.0
         
-        # ─── Score evaluation ───
-        if final_score < CONFIG["score_threshold_weak"]:
-            return "NO TRADE", f"Score rendah ({final_score})", final_score
+        # ─── PROBABILISTIC BAND ───
+        prob = score_to_probability(final_score)
         
-        if final_score < CONFIG["score_threshold_strong"]:
-            return "NO TRADE", f"Sinyal lemah ({final_score})", final_score
+        if final_score < 45:
+            return "NO TRADE", f"Low probability zone ({final_score})", final_score, prob
+        
+        if final_score < 55:
+            return "WATCH", f"Marginal setup ({final_score})", final_score, prob
+        
+        if final_score < 62:
+            if tf_1h_direction == "bullish":
+                direction = "WEAK LONG"
+            elif tf_1h_direction == "bearish":
+                direction = "WEAK SHORT"
+            else:
+                return "WATCH", "Early signal zone", final_score, prob
+            return direction, f"Early signal zone ({final_score})", final_score, prob
         
         if tf_1h_direction == "neutral":
-            return "NO TRADE", "TF 1H neutral", final_score
+            return "WATCH", "TF 1H neutral, high score", final_score, prob
         
         if tf_1h_direction == "bullish":
             direction = "LONG"
         elif tf_1h_direction == "bearish":
             direction = "SHORT"
         else:
-            return "NO TRADE", "Arah tidak jelas", final_score
+            return "WATCH", "Direction unclear", final_score, prob
         
-        return direction, f"Confirmed ({final_score})", final_score
+        return direction, f"Confirmed ({final_score})", final_score, prob
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -892,14 +917,14 @@ class RiskEngine:
     def calculate_levels(entry_price, direction):
         entry_price = normalize(entry_price)
         
-        if direction == "LONG":
+        if direction in ["LONG", "WEAK LONG"]:
             tp1 = entry_price * (1 + 3/100)
             tp2 = entry_price * (1 + 6/100)
             tp3 = entry_price * (1 + 10/100)
             sl = entry_price * (1 - 5/100)
             tp_pct = CONFIG["tp_long"]
             sl_pct = CONFIG["sl_long"]
-        elif direction == "SHORT":
+        elif direction in ["SHORT", "WEAK SHORT"]:
             tp1 = entry_price * (1 - 3/100)
             tp2 = entry_price * (1 - 6/100)
             tp3 = entry_price * (1 - 10/100)
@@ -928,7 +953,7 @@ class RiskEngine:
         atr_15m = RiskEngine._calc_atr(candles_15m)
         atr_30m = RiskEngine._calc_atr(candles_30m)
 
-        if direction == "LONG":
+        if direction in ["LONG", "WEAK LONG"]:
             return {
                 "entry_1_breakout": round(current_price, 4),
                 "entry_2_pullback": round(current_price - atr_15m * 0.5, 4),
@@ -1002,7 +1027,7 @@ class System3:
     def __init__(self):
         self.timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.state = {}
-        self.cycle_best = []  # Untuk entry guarantee layer
+        self.cycle_best = []
 
     def get_state(self, symbol):
         if symbol not in self.state:
@@ -1052,7 +1077,7 @@ class System3:
 
         funding = DataGateway.get(symbol, DataIngestion.fetch_funding_rate)
 
-        print("\n[2] DERIVATIVES INTELLIGENCE (45%)...")
+        print("\n[2] DERIVATIVES INTELLIGENCE (35%)...")
         deriv = DerivativesIntelligence.analyze(
             oi_current=oi_sekarang,
             oi_previous=oi_sebelumnya,
@@ -1065,7 +1090,7 @@ class System3:
         print(f"    Crowd Trap  : {deriv['crowd_trap']}")
         print(f"    Deriv Score : {deriv['score']}")
 
-        print("\n[3] TIMEFRAME STRUCTURE (40%)...")
+        print("\n[3] TIMEFRAME STRUCTURE (50%)...")
         tf_results = TimeframeEngine.analyze_all_timeframes(klines)
         for tf in ["5m", "15m", "30m", "1h"]:
             r = tf_results[tf]
@@ -1073,7 +1098,7 @@ class System3:
         structure_score = TimeframeEngine.calculate_structure_score(tf_results)
         print(f"    Structure Score: {structure_score}")
 
-        print("\n[4] VOLATILITY FILTER (10%)...")
+        print("\n[4] VOLATILITY FILTER (15%)...")
         vol = VolatilityFilter.analyze(klines["1h"])
         print(f"    State: {vol['state']} ({vol['volatility_ratio']}%)")
         print(f"    Block: {vol['block']}")
@@ -1090,12 +1115,12 @@ class System3:
         )
 
         state = self.get_state(symbol)
-        final_score = int(raw_score * 0.8 + state["last_score"] * 0.2)
+        final_score = int(raw_score * 0.85 + state["last_score"] * 0.15)
         final_score = System3.stability_gate(final_score, state["last_score"])
         print(f"    Raw: {raw_score} | Smoothed: {final_score}")
 
         print("\n[6] DECISION ENGINE...")
-        direction, reason, adjusted_score = DecisionEngine.decide(
+        direction, reason, adjusted_score, prob = DecisionEngine.decide(
             final_score=final_score,
             raw_score=raw_score,
             tf_1h_direction=tf_results["1h"]["direction"],
@@ -1115,13 +1140,9 @@ class System3:
         state["last_decision"] = direction
         state["last_time"] = time.time()
 
-        print(f"    DECISION: {direction} | Reason: {reason}")
+        print(f"    DECISION: {direction} | Reason: {reason} | Prob: {prob:.0%}")
 
-        # ─── Entry guarantee layer ───
-        if direction == "NO TRADE" and adjusted_score >= 55:
-            self.cycle_best.append((symbol, adjusted_score, tf_results["1h"]["direction"], reason))
-
-        if direction in ["LONG", "SHORT"]:
+        if direction in ["LONG", "SHORT", "WEAK LONG", "WEAK SHORT"]:
             print("\n[7] RISK & TP/SL ENGINE...")
             levels = RiskEngine.calculate_levels(ticker["last_price"], direction)
             entries = RiskEngine.generate_entry_zones(
@@ -1142,6 +1163,7 @@ class System3:
             "symbol": symbol,
             "direction": direction,
             "final_score": adjusted_score,
+            "probability": prob,
             "price": ticker["last_price"],
             "derivatives": deriv,
             "tf_results": {tf: {"direction": r["direction"], "strength": r["strength"]}
@@ -1172,6 +1194,7 @@ class System3:
             "direction": "NO TRADE",
             "reason": reason,
             "final_score": 0,
+            "probability": 0.0,
         }
         print(f"\n  → NO TRADE: {reason}")
         return output
@@ -1179,14 +1202,17 @@ class System3:
     def _display_signal(self, output):
         print(f"\n{'─'*50}")
 
-        if output["direction"] == "NO TRADE":
+        direction = output["direction"]
+        prob = output.get("probability", 0)
+
+        if direction == "NO TRADE":
             print(f"  ⚪ NO TRADE - {output['symbol']}")
             print(f"  Reason: {output['reason']}")
-        elif output["direction"] == "LONG":
-            emoji = "🟢"
+        elif direction in ["LONG", "WEAK LONG"]:
+            emoji = "🟢" if direction == "LONG" else "🟡"
             levels = output.get("levels", {})
 
-            print(f"  {emoji} SINYAL {output['direction']} - {output['symbol']}")
+            print(f"  {emoji} {direction} - {output['symbol']} (P: {prob:.0%})")
             print(f"  {'─'*40}")
             print(f"  Entry    : {levels.get('entry_price', 'N/A')}")
             print(f"  TP1      : {levels.get('tp1', 'N/A')}")
@@ -1196,7 +1222,7 @@ class System3:
             print(f"  Score    : {output['final_score']}/100")
 
             msg = (
-                f"🟢 *LONG SIGNAL*\n"
+                f"{emoji} *{direction}*\n"
                 f"━━━━━━━━━━━━━━\n"
                 f"💱 Pair: {output['symbol']}\n"
                 f"💰 Entry: {levels.get('entry_price', 'N/A')}\n"
@@ -1205,14 +1231,15 @@ class System3:
                 f"🎯 TP3: {levels.get('tp3', 'N/A')}\n"
                 f"🛑 SL: {levels.get('sl', 'N/A')}\n"
                 f"⚡ Score: {output['final_score']}/100\n"
+                f"📊 Prob: {prob:.0%}\n"
                 f"📝 Reason: {output.get('reason','')}"
             )
             Telegram.send(msg)
-        elif output["direction"] == "SHORT":
-            emoji = "🔴"
+        elif direction in ["SHORT", "WEAK SHORT"]:
+            emoji = "🔴" if direction == "SHORT" else "🟠"
             levels = output.get("levels", {})
 
-            print(f"  {emoji} SINYAL {output['direction']} - {output['symbol']}")
+            print(f"  {emoji} {direction} - {output['symbol']} (P: {prob:.0%})")
             print(f"  {'─'*40}")
             print(f"  Entry    : {levels.get('entry_price', 'N/A')}")
             print(f"  TP1      : {levels.get('tp1', 'N/A')}")
@@ -1222,7 +1249,7 @@ class System3:
             print(f"  Score    : {output['final_score']}/100")
 
             msg = (
-                f"🔴 *SHORT SIGNAL*\n"
+                f"{emoji} *{direction}*\n"
                 f"━━━━━━━━━━━━━━\n"
                 f"💱 Pair: {output['symbol']}\n"
                 f"💰 Entry: {levels.get('entry_price', 'N/A')}\n"
@@ -1231,9 +1258,13 @@ class System3:
                 f"🎯 TP3: {levels.get('tp3', 'N/A')}\n"
                 f"🛑 SL: {levels.get('sl', 'N/A')}\n"
                 f"⚡ Score: {output['final_score']}/100\n"
+                f"📊 Prob: {prob:.0%}\n"
                 f"📝 Reason: {output.get('reason','')}"
             )
             Telegram.send(msg)
+        elif direction == "WATCH":
+            print(f"  👁 WATCH - {output['symbol']} (P: {prob:.0%})")
+            print(f"  Reason: {output['reason']}")
 
         print(f"{'─'*50}\n")
 
@@ -1251,15 +1282,13 @@ class System3:
         print(f"  [SAVED] {filename}")
 
     def get_best_fallback(self):
-        """SOLUSI 4: Entry guarantee layer - pilih pair terbaik jika semua NO TRADE"""
         if not self.cycle_best:
             return None
         
-        # Sort by score descending
         self.cycle_best.sort(key=lambda x: x[1], reverse=True)
         best = self.cycle_best[0]
         
-        if best[1] >= 55 and best[2] != "neutral":
+        if best[1] >= 50 and best[2] != "neutral":
             return best
         return None
 
@@ -1293,7 +1322,7 @@ def main():
     
     print("╔══════════════════════════════════════════════════════════╗")
     print("║   SYSTEM3 v1.0.1 — FUTURES CORE ENGINE                 ║")
-    print("║   + Adaptive Decision (Penalty-Based)                  ║")
+    print("║   + Score Rebalance + Probabilistic Decision           ║")
     print("╚══════════════════════════════════════════════════════════╝")
     print(f"  Start: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()
@@ -1321,7 +1350,6 @@ def main():
         else:
             trending_pairs = []
         
-        # ─── SOLUSI 5: Trending dibatasi 10 pair ───
         scan_pairs = list(
             dict.fromkeys(
                 PAIR_UNIVERSE_CORE + trending_pairs[:10]
@@ -1335,6 +1363,9 @@ def main():
         total_signals = 0
         long_count = 0
         short_count = 0
+        weak_long_count = 0
+        weak_short_count = 0
+        watch_count = 0
         no_trade_count = 0
 
         print("▸ SCANNING PAIRS")
@@ -1344,30 +1375,35 @@ def main():
             try:
                 result = system3.run_cycle(symbol)
                 total_signals += 1
-                if result["direction"] == "LONG":
+                d = result["direction"]
+                if d == "LONG":
                     long_count += 1
-                elif result["direction"] == "SHORT":
+                elif d == "SHORT":
                     short_count += 1
+                elif d == "WEAK LONG":
+                    weak_long_count += 1
+                elif d == "WEAK SHORT":
+                    weak_short_count += 1
+                elif d == "WATCH":
+                    watch_count += 1
                 else:
                     no_trade_count += 1
                 time.sleep(1)
             except Exception as e:
                 print(f"  [ERROR] {symbol}: {e}")
 
-        # ─── SOLUSI 4: Entry guarantee layer ───
         if long_count == 0 and short_count == 0:
             fallback = system3.get_best_fallback()
             if fallback:
                 symbol, score, direction, reason = fallback
                 print(f"\n⚠️ NO SIGNAL - FALLBACK: {direction} {symbol} (score: {score})")
-                # Kirim sebagai sinyal fallback
                 msg = (
                     f"⚠️ *FALLBACK SIGNAL*\n"
                     f"━━━━━━━━━━━━━━\n"
                     f"💱 Pair: {symbol}\n"
                     f"📊 Type: {direction}\n"
                     f"⚡ Score: {score}\n"
-                    f"📝 Reason: Best available ({reason})"
+                    f"📝 Reason: Best available"
                 )
                 Telegram.send(msg)
                 if direction == "LONG":
@@ -1384,9 +1420,12 @@ def main():
         print("\n" + "="*60)
         print("  CYCLE COMPLETE")
         print("="*60)
-        print(f"  LONG     : {long_count}")
-        print(f"  SHORT    : {short_count}")
-        print(f"  NO TRADE : {no_trade_count}")
+        print(f"  LONG       : {long_count}")
+        print(f"  SHORT      : {short_count}")
+        print(f"  WEAK LONG  : {weak_long_count}")
+        print(f"  WEAK SHORT : {weak_short_count}")
+        print(f"  WATCH      : {watch_count}")
+        print(f"  NO TRADE   : {no_trade_count}")
         print("="*60)
 
         TelegramSummary.send(cycle_summary)

@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-12 23:42:59",
+  "symbol": "BTCUSDT",
+  "direction": "NO TRADE",
+  "final_score": 25,
+  "probability": 0.3,
+  "price": 63828.0,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.08,
+    "funding_status": "long_crowded",
+    "funding_rate": 63828.0,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 45
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 96
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.73,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 103832394,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Low probability zone (25)"
+}
