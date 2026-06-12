@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-06-12 17:56:47",
+  "symbol": "XRPUSDT",
+  "direction": "NO TRADE",
+  "final_score": 43,
+  "price": 1.1441,
+  "derivatives": {
+    "oi_trend": "rising_bullish",
+    "oi_change_pct": 27095635496.47,
+    "funding_status": "neutral",
+    "funding_rate": -0.0032,
+    "risk_level": "high",
+    "derivatives_signal": "bullish",
+    "crowd_trap": false,
+    "score": 60
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.74,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 103786321,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "OI spike long trap risk"
+}
