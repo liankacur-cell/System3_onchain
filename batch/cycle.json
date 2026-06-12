@@ -1,15 +1,15 @@
 [
   {
-    "timestamp": "2026-06-12 08:56:47",
+    "timestamp": "2026-06-12 09:41:47",
     "symbol": "BTCUSDT",
     "direction": "NO TRADE",
     "final_score": 34,
-    "price": 63417.91,
+    "price": 63590.03,
     "derivatives": {
       "oi_trend": "stable",
-      "oi_change_pct": -0.11,
+      "oi_change_pct": 0.27,
       "funding_status": "long_crowded",
-      "funding_rate": 63417.91,
+      "funding_rate": 63590.03,
       "risk_level": "low",
       "derivatives_signal": "neutral",
       "crowd_trap": false,
@@ -26,7 +26,7 @@
       },
       "30m": {
         "direction": "bullish",
-        "strength": 51
+        "strength": 100
       },
       "1h": {
         "direction": "bullish",
@@ -35,12 +35,12 @@
     },
     "volatility": {
       "state": "low",
-      "volatility_ratio": 0.72,
+      "volatility_ratio": 0.68,
       "block": false,
       "score": 50
     },
     "rpc": {
-      "block": 103714364,
+      "block": 103720346,
       "status": "active"
     },
     "levels": null,
@@ -48,16 +48,16 @@
     "reason": "Long crowded, no long allowed"
   },
   {
-    "timestamp": "2026-06-12 08:56:47",
+    "timestamp": "2026-06-12 09:41:47",
     "symbol": "ETHUSDT",
     "direction": "NO TRADE",
-    "final_score": 35,
-    "price": 1665.87,
+    "final_score": 34,
+    "price": 1675.77,
     "derivatives": {
       "oi_trend": "stable",
-      "oi_change_pct": -0.19,
+      "oi_change_pct": 0.59,
       "funding_status": "long_crowded",
-      "funding_rate": 1665.87,
+      "funding_rate": 1675.77,
       "risk_level": "low",
       "derivatives_signal": "neutral",
       "crowd_trap": false,
@@ -73,118 +73,22 @@
         "strength": 50
       },
       "30m": {
-        "direction": "bullish",
-        "strength": 47
-      },
-      "1h": {
-        "direction": "bullish",
-        "strength": 83
-      }
-    },
-    "volatility": {
-      "state": "normal",
-      "volatility_ratio": 1.02,
-      "block": false,
-      "score": 60
-    },
-    "rpc": {
-      "block": 103714368,
-      "status": "active"
-    },
-    "levels": null,
-    "entries": null,
-    "reason": "Long crowded, no long allowed"
-  },
-  {
-    "timestamp": "2026-06-12 08:56:47",
-    "symbol": "SOLUSDT",
-    "direction": "NO TRADE",
-    "final_score": 48,
-    "price": 66.63,
-    "derivatives": {
-      "oi_trend": "stable",
-      "oi_change_pct": -0.18,
-      "funding_status": "long_crowded",
-      "funding_rate": 66.63,
-      "risk_level": "low",
-      "derivatives_signal": "neutral",
-      "crowd_trap": false,
-      "score": 35
-    },
-    "tf_results": {
-      "5m": {
-        "direction": "neutral",
-        "strength": 50
-      },
-      "15m": {
-        "direction": "bullish",
-        "strength": 50
-      },
-      "30m": {
-        "direction": "bullish",
-        "strength": 52
-      },
-      "1h": {
         "direction": "bullish",
         "strength": 100
-      }
-    },
-    "volatility": {
-      "state": "normal",
-      "volatility_ratio": 1.09,
-      "block": false,
-      "score": 60
-    },
-    "rpc": {
-      "block": 103714373,
-      "status": "active"
-    },
-    "levels": null,
-    "entries": null,
-    "reason": "Long crowded, no long allowed"
-  },
-  {
-    "timestamp": "2026-06-12 08:56:47",
-    "symbol": "BNBUSDT",
-    "direction": "NO TRADE",
-    "final_score": 34,
-    "price": 601.57,
-    "derivatives": {
-      "oi_trend": "stable",
-      "oi_change_pct": -0.37,
-      "funding_status": "long_crowded",
-      "funding_rate": 601.57,
-      "risk_level": "low",
-      "derivatives_signal": "neutral",
-      "crowd_trap": false,
-      "score": 35
-    },
-    "tf_results": {
-      "5m": {
-        "direction": "neutral",
-        "strength": 50
-      },
-      "15m": {
-        "direction": "neutral",
-        "strength": 50
-      },
-      "30m": {
-        "direction": "bullish",
-        "strength": 30
       },
       "1h": {
         "direction": "bullish",
-        "strength": 73
+        "strength": 70
       }
     },
     "volatility": {
       "state": "low",
-      "volatility_ratio": 0.63,
+      "volatility_ratio": 0.96,
       "block": false,
       "score": 50
     },
     "rpc": {
-      "block": 103714377,
+      "block": 103720351,
       "status": "active"
     },
     "levels": null,
@@ -192,20 +96,20 @@
     "reason": "Long crowded, no long allowed"
   },
   {
-    "timestamp": "2026-06-12 08:56:47",
-    "symbol": "XRPUSDT",
+    "timestamp": "2026-06-12 09:41:47",
+    "symbol": "SOLUSDT",
     "direction": "NO TRADE",
-    "final_score": 35,
-    "price": 1.1386,
+    "final_score": 52,
+    "price": 67.17,
     "derivatives": {
-      "oi_trend": "stable",
-      "oi_change_pct": -0.19,
+      "oi_trend": "rising_bullish",
+      "oi_change_pct": 14686944.15,
       "funding_status": "long_crowded",
-      "funding_rate": 1.1386,
-      "risk_level": "low",
+      "funding_rate": 9785977.52,
+      "risk_level": "high",
       "derivatives_signal": "neutral",
       "crowd_trap": false,
-      "score": 35
+      "score": 45
     },
     "tf_results": {
       "5m": {
@@ -214,15 +118,15 @@
       },
       "15m": {
         "direction": "bullish",
-        "strength": 56
+        "strength": 100
       },
       "30m": {
         "direction": "bullish",
-        "strength": 51
+        "strength": 100
       },
       "1h": {
-        "direction": "neutral",
-        "strength": 50
+        "direction": "bullish",
+        "strength": 100
       }
     },
     "volatility": {
@@ -232,7 +136,7 @@
       "score": 60
     },
     "rpc": {
-      "block": 103714382,
+      "block": 103720380,
       "status": "active"
     },
     "levels": null,
@@ -240,16 +144,256 @@
     "reason": "Long crowded, no long allowed"
   },
   {
-    "timestamp": "2026-06-12 08:56:47",
+    "timestamp": "2026-06-12 09:41:47",
+    "symbol": "BNBUSDT",
+    "direction": "NO TRADE",
+    "final_score": 34,
+    "price": 605.52,
+    "derivatives": {
+      "oi_trend": "stable",
+      "oi_change_pct": 0.66,
+      "funding_status": "long_crowded",
+      "funding_rate": 605.52,
+      "risk_level": "low",
+      "derivatives_signal": "neutral",
+      "crowd_trap": false,
+      "score": 35
+    },
+    "tf_results": {
+      "5m": {
+        "direction": "neutral",
+        "strength": 50
+      },
+      "15m": {
+        "direction": "neutral",
+        "strength": 50
+      },
+      "30m": {
+        "direction": "bullish",
+        "strength": 100
+      },
+      "1h": {
+        "direction": "bullish",
+        "strength": 100
+      }
+    },
+    "volatility": {
+      "state": "low",
+      "volatility_ratio": 0.63,
+      "block": false,
+      "score": 50
+    },
+    "rpc": {
+      "block": 103720384,
+      "status": "active"
+    },
+    "levels": null,
+    "entries": null,
+    "reason": "Long crowded, no long allowed"
+  },
+  {
+    "timestamp": "2026-06-12 09:41:47",
+    "symbol": "XRPUSDT",
+    "direction": "NO TRADE",
+    "final_score": 48,
+    "price": 1.1464,
+    "derivatives": {
+      "oi_trend": "stable",
+      "oi_change_pct": 0.69,
+      "funding_status": "long_crowded",
+      "funding_rate": 1.1464,
+      "risk_level": "low",
+      "derivatives_signal": "neutral",
+      "crowd_trap": false,
+      "score": 35
+    },
+    "tf_results": {
+      "5m": {
+        "direction": "neutral",
+        "strength": 50
+      },
+      "15m": {
+        "direction": "bullish",
+        "strength": 100
+      },
+      "30m": {
+        "direction": "bullish",
+        "strength": 100
+      },
+      "1h": {
+        "direction": "bullish",
+        "strength": 100
+      }
+    },
+    "volatility": {
+      "state": "normal",
+      "volatility_ratio": 1.03,
+      "block": false,
+      "score": 60
+    },
+    "rpc": {
+      "block": 103720389,
+      "status": "active"
+    },
+    "levels": null,
+    "entries": null,
+    "reason": "Long crowded, no long allowed"
+  },
+  {
+    "timestamp": "2026-06-12 09:41:47",
     "symbol": "SUIUSDT",
     "direction": "NO TRADE",
     "final_score": 35,
-    "price": 0.7515,
+    "price": 0.7577,
     "derivatives": {
       "oi_trend": "stable",
-      "oi_change_pct": 0.03,
+      "oi_change_pct": 0.83,
       "funding_status": "long_crowded",
-      "funding_rate": 0.7515,
+      "funding_rate": 0.7577,
+      "risk_level": "low",
+      "derivatives_signal": "neutral",
+      "crowd_trap": false,
+      "score": 35
+    },
+    "tf_results": {
+      "5m": {
+        "direction": "neutral",
+        "strength": 50
+      },
+      "15m": {
+        "direction": "neutral",
+        "strength": 50
+      },
+      "30m": {
+        "direction": "bullish",
+        "strength": 91
+      },
+      "1h": {
+        "direction": "bullish",
+        "strength": 67
+      }
+    },
+    "volatility": {
+      "state": "normal",
+      "volatility_ratio": 1.17,
+      "block": false,
+      "score": 60
+    },
+    "rpc": {
+      "block": 103720394,
+      "status": "active"
+    },
+    "levels": null,
+    "entries": null,
+    "reason": "Long crowded, no long allowed"
+  },
+  {
+    "timestamp": "2026-06-12 09:41:47",
+    "symbol": "DOGEUSDT",
+    "direction": "NO TRADE",
+    "final_score": 34,
+    "price": 0.08642,
+    "derivatives": {
+      "oi_trend": "stable",
+      "oi_change_pct": 0.71,
+      "funding_status": "long_crowded",
+      "funding_rate": 0.0864,
+      "risk_level": "low",
+      "derivatives_signal": "neutral",
+      "crowd_trap": false,
+      "score": 35
+    },
+    "tf_results": {
+      "5m": {
+        "direction": "neutral",
+        "strength": 50
+      },
+      "15m": {
+        "direction": "neutral",
+        "strength": 50
+      },
+      "30m": {
+        "direction": "bullish",
+        "strength": 100
+      },
+      "1h": {
+        "direction": "bullish",
+        "strength": 92
+      }
+    },
+    "volatility": {
+      "state": "low",
+      "volatility_ratio": 0.85,
+      "block": false,
+      "score": 50
+    },
+    "rpc": {
+      "block": 103720398,
+      "status": "active"
+    },
+    "levels": null,
+    "entries": null,
+    "reason": "Long crowded, no long allowed"
+  },
+  {
+    "timestamp": "2026-06-12 09:41:47",
+    "symbol": "UNIUSDT",
+    "direction": "NO TRADE",
+    "final_score": 35,
+    "price": 2.519,
+    "derivatives": {
+      "oi_trend": "stable",
+      "oi_change_pct": 0.76,
+      "funding_status": "long_crowded",
+      "funding_rate": 2.519,
+      "risk_level": "low",
+      "derivatives_signal": "neutral",
+      "crowd_trap": false,
+      "score": 35
+    },
+    "tf_results": {
+      "5m": {
+        "direction": "neutral",
+        "strength": 50
+      },
+      "15m": {
+        "direction": "neutral",
+        "strength": 50
+      },
+      "30m": {
+        "direction": "bullish",
+        "strength": 100
+      },
+      "1h": {
+        "direction": "bullish",
+        "strength": 76
+      }
+    },
+    "volatility": {
+      "state": "normal",
+      "volatility_ratio": 1.44,
+      "block": false,
+      "score": 60
+    },
+    "rpc": {
+      "block": 103720403,
+      "status": "active"
+    },
+    "levels": null,
+    "entries": null,
+    "reason": "Long crowded, no long allowed"
+  },
+  {
+    "timestamp": "2026-06-12 09:41:47",
+    "symbol": "ZECUSDT",
+    "direction": "NO TRADE",
+    "final_score": 32,
+    "price": 431.68,
+    "derivatives": {
+      "oi_trend": "stable",
+      "oi_change_pct": 1.34,
+      "funding_status": "long_crowded",
+      "funding_rate": 431.68,
       "risk_level": "low",
       "derivatives_signal": "neutral",
       "crowd_trap": false,
@@ -258,103 +402,7 @@
     "tf_results": {
       "5m": {
         "direction": "bearish",
-        "strength": 41
-      },
-      "15m": {
-        "direction": "neutral",
-        "strength": 50
-      },
-      "30m": {
-        "direction": "bullish",
-        "strength": 46
-      },
-      "1h": {
-        "direction": "bullish",
-        "strength": 51
-      }
-    },
-    "volatility": {
-      "state": "normal",
-      "volatility_ratio": 1.21,
-      "block": false,
-      "score": 60
-    },
-    "rpc": {
-      "block": 103714387,
-      "status": "active"
-    },
-    "levels": null,
-    "entries": null,
-    "reason": "Long crowded, no long allowed"
-  },
-  {
-    "timestamp": "2026-06-12 08:56:47",
-    "symbol": "DOGEUSDT",
-    "direction": "NO TRADE",
-    "final_score": 34,
-    "price": 0.08581,
-    "derivatives": {
-      "oi_trend": "stable",
-      "oi_change_pct": -0.29,
-      "funding_status": "long_crowded",
-      "funding_rate": 0.0858,
-      "risk_level": "low",
-      "derivatives_signal": "neutral",
-      "crowd_trap": false,
-      "score": 35
-    },
-    "tf_results": {
-      "5m": {
-        "direction": "neutral",
-        "strength": 50
-      },
-      "15m": {
-        "direction": "neutral",
-        "strength": 50
-      },
-      "30m": {
-        "direction": "bullish",
-        "strength": 36
-      },
-      "1h": {
-        "direction": "bullish",
-        "strength": 84
-      }
-    },
-    "volatility": {
-      "state": "low",
-      "volatility_ratio": 0.89,
-      "block": false,
-      "score": 50
-    },
-    "rpc": {
-      "block": 103714391,
-      "status": "active"
-    },
-    "levels": null,
-    "entries": null,
-    "reason": "Long crowded, no long allowed"
-  },
-  {
-    "timestamp": "2026-06-12 08:56:47",
-    "symbol": "UNIUSDT",
-    "direction": "NO TRADE",
-    "final_score": 35,
-    "price": 2.5,
-    "derivatives": {
-      "oi_trend": "stable",
-      "oi_change_pct": -0.12,
-      "funding_status": "long_crowded",
-      "funding_rate": 2.5,
-      "risk_level": "low",
-      "derivatives_signal": "neutral",
-      "crowd_trap": false,
-      "score": 35
-    },
-    "tf_results": {
-      "5m": {
-        "direction": "neutral",
-        "strength": 50
+        "strength": 30
       },
       "15m": {
         "direction": "neutral",
@@ -365,66 +413,18 @@
         "strength": 76
       },
       "1h": {
-        "direction": "bullish",
-        "strength": 47
-      }
-    },
-    "volatility": {
-      "state": "normal",
-      "volatility_ratio": 1.51,
-      "block": false,
-      "score": 60
-    },
-    "rpc": {
-      "block": 103714396,
-      "status": "active"
-    },
-    "levels": null,
-    "entries": null,
-    "reason": "Long crowded, no long allowed"
-  },
-  {
-    "timestamp": "2026-06-12 08:56:47",
-    "symbol": "ZECUSDT",
-    "direction": "NO TRADE",
-    "final_score": 32,
-    "price": 425.96,
-    "derivatives": {
-      "oi_trend": "stable",
-      "oi_change_pct": -0.14,
-      "funding_status": "long_crowded",
-      "funding_rate": 425.96,
-      "risk_level": "low",
-      "derivatives_signal": "neutral",
-      "crowd_trap": false,
-      "score": 35
-    },
-    "tf_results": {
-      "5m": {
-        "direction": "bearish",
-        "strength": 99
-      },
-      "15m": {
-        "direction": "neutral",
-        "strength": 50
-      },
-      "30m": {
-        "direction": "bullish",
-        "strength": 32
-      },
-      "1h": {
         "direction": "neutral",
         "strength": 50
       }
     },
     "volatility": {
       "state": "high",
-      "volatility_ratio": 2.37,
+      "volatility_ratio": 2.3,
       "block": false,
       "score": 40
     },
     "rpc": {
-      "block": 103714401,
+      "block": 103720407,
       "status": "active"
     },
     "levels": null,
