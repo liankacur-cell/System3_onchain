@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-13 21:34:20",
+  "symbol": "ARBUSDT",
+  "direction": "NO TRADE",
+  "final_score": 51,
+  "probability": 0.0,
+  "price": 0.0863,
+  "derivatives": {
+    "oi_trend": "rising_bullish",
+    "oi_change_pct": 219184521220.97,
+    "funding_status": "long_crowded",
+    "funding_rate": 189156241.9,
+    "risk_level": "high",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 56
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 70
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 97
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.98,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 104007263,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "OI spike long trap risk"
+}
