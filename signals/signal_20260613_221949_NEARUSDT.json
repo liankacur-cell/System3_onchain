@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-13 22:19:19",
+  "symbol": "NEARUSDT",
+  "direction": "WATCH",
+  "final_score": 45,
+  "probability": 0.4,
+  "price": 2.113,
+  "derivatives": {
+    "oi_trend": "rising_bearish",
+    "oi_change_pct": 2.13,
+    "funding_status": "long_crowded",
+    "funding_rate": 2.113,
+    "risk_level": "medium",
+    "derivatives_signal": "bearish",
+    "crowd_trap": false,
+    "score": 34
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "neutral",
+      "strength": 50
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.39,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 104013259,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Marginal setup (45)"
+}
