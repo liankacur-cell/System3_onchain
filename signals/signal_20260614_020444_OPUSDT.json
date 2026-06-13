@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-14 02:04:19",
+  "symbol": "OPUSDT",
+  "direction": "NO TRADE",
+  "final_score": 50,
+  "probability": 0.0,
+  "price": 0.1083,
+  "derivatives": {
+    "oi_trend": "declining",
+    "oi_change_pct": -100.0,
+    "funding_status": "long_crowded",
+    "funding_rate": 0.1083,
+    "risk_level": "high",
+    "derivatives_signal": "bullish",
+    "crowd_trap": true,
+    "score": 23
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 73
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 98
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 67
+    }
+  },
+  "volatility": {
+    "state": "high",
+    "volatility_ratio": 2.8,
+    "block": false,
+    "score": 40
+  },
+  "rpc": {
+    "block": 104043242,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Crowd trap detected"
+}
