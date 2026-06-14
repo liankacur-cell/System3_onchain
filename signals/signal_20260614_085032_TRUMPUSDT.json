@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-14 08:49:19",
+  "symbol": "TRUMPUSDT",
+  "direction": "NO TRADE",
+  "final_score": 27,
+  "probability": 0.0,
+  "price": 2.115,
+  "derivatives": {
+    "oi_trend": "declining",
+    "oi_change_pct": -100.0,
+    "funding_status": "long_crowded",
+    "funding_rate": 2.115,
+    "risk_level": "high",
+    "derivatives_signal": "bearish",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 67
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 36
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 30
+    }
+  },
+  "volatility": {
+    "state": "high",
+    "volatility_ratio": 2.83,
+    "block": false,
+    "score": 40
+  },
+  "rpc": {
+    "block": 104097332,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "High risk, score insufficient"
+}
