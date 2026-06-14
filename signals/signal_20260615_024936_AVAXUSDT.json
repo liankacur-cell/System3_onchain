@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-15 02:49:19",
+  "symbol": "AVAXUSDT",
+  "direction": "NO TRADE",
+  "final_score": 12,
+  "probability": 0.25,
+  "price": 6.437,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.44,
+    "funding_status": "long_crowded",
+    "funding_rate": 6.437,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 75
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 86
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 98
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.76,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 104241169,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Low probability zone (12)"
+}
