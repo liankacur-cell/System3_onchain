@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-14 23:49:20",
+  "symbol": "TAOUSDT",
+  "direction": "NO TRADE",
+  "final_score": 27,
+  "probability": 0.25,
+  "price": 266.7,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 1.29,
+    "funding_status": "long_crowded",
+    "funding_rate": 266.7,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 41
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 66
+    }
+  },
+  "volatility": {
+    "state": "high",
+    "volatility_ratio": 2.57,
+    "block": false,
+    "score": 40
+  },
+  "rpc": {
+    "block": 104217216,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Low probability zone (27)"
+}
