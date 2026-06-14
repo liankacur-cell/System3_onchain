@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-06-15 06:34:19",
+  "symbol": "SOLUSDT",
+  "direction": "WEAK LONG",
+  "final_score": 51,
+  "probability": 0.55,
+  "price": 70.7,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.33,
+    "funding_status": "long_crowded",
+    "funding_rate": 70.7,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.98,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 104271163,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 70.7,
+    "tp1": 72.821,
+    "tp2": 74.942,
+    "tp3": 77.77,
+    "sl": 67.165,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 70.7,
+    "entry_2_pullback": 70.4211,
+    "entry_3_deep": 70.1371
+  },
+  "reason": "Early signal zone (51)"
+}
