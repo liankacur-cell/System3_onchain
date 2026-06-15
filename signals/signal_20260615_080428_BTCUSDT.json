@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-06-15 08:04:19",
+  "symbol": "BTCUSDT",
+  "direction": "WEAK LONG",
+  "final_score": 51,
+  "probability": 0.55,
+  "price": 65439.99,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.47,
+    "funding_status": "long_crowded",
+    "funding_rate": 65439.99,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 30
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 33
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.63,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 104283128,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 65439.99,
+    "tp1": 67403.1897,
+    "tp2": 69366.3894,
+    "tp3": 71983.989,
+    "sl": 62167.9905,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 65440.0,
+    "entry_2_pullback": 65295.7054,
+    "entry_3_deep": 65075.4864
+  },
+  "reason": "Early signal zone (51)"
+}
