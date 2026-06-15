@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-16 02:49:19",
+  "symbol": "WLDUSDT",
+  "direction": "NO TRADE",
+  "final_score": 38,
+  "probability": 0.0,
+  "price": 0.5862,
+  "derivatives": {
+    "oi_trend": "rising_bullish",
+    "oi_change_pct": 35499933640.04,
+    "funding_status": "long_crowded",
+    "funding_rate": 209485109.0,
+    "risk_level": "high",
+    "derivatives_signal": "neutral",
+    "crowd_trap": true,
+    "score": 46
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 57
+    }
+  },
+  "volatility": {
+    "state": "extreme",
+    "volatility_ratio": 3.08,
+    "block": true,
+    "score": 30
+  },
+  "rpc": {
+    "block": 104433194,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Extreme volatility block"
+}
