@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-16 05:04:19",
+  "symbol": "NEARUSDT",
+  "direction": "NO TRADE",
+  "final_score": 54,
+  "probability": 0.0,
+  "price": 2.457,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.53,
+    "funding_status": "long_crowded",
+    "funding_rate": 2.457,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": true,
+    "score": 39
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 72
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 62
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 51
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 44
+    }
+  },
+  "volatility": {
+    "state": "high",
+    "volatility_ratio": 2.1,
+    "block": false,
+    "score": 40
+  },
+  "rpc": {
+    "block": 104451146,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Crowd trap detected"
+}
