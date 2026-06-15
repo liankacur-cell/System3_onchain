@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-15 22:19:20",
+  "symbol": "AVAXUSDT",
+  "direction": "WATCH",
+  "final_score": 57,
+  "probability": 0.0,
+  "price": 6.952,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.2,
+    "funding_status": "long_crowded",
+    "funding_rate": 6.952,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": true,
+    "score": 39
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 54
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 57
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.96,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 104397140,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Opportunity floor override"
+}
