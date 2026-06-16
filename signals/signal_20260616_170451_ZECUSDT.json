@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-16 17:04:19",
+  "symbol": "ZECUSDT",
+  "direction": "NO TRADE",
+  "final_score": 39,
+  "probability": 0.0,
+  "price": 521.75,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.13,
+    "funding_status": "long_crowded",
+    "funding_rate": 521.75,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": true,
+    "score": 39
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 30
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 79
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.76,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 104547126,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Crowd trap detected"
+}
