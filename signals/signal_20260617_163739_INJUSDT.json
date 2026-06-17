@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-17 16:37:17",
+  "symbol": "INJUSDT",
+  "direction": "NO TRADE",
+  "final_score": 22,
+  "probability": 0.0,
+  "price": 5.463,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.52,
+    "funding_status": "long_crowded",
+    "funding_rate": 5.463,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": true,
+    "score": 39
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 45
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 91
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 46
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.59,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 104735442,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Crowd trap detected"
+}
