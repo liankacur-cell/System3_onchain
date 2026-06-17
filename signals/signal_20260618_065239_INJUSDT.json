@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-18 06:52:18",
+  "symbol": "INJUSDT",
+  "direction": "NO TRADE",
+  "final_score": 13,
+  "probability": 0.0,
+  "price": 5.448,
+  "derivatives": {
+    "oi_trend": "declining",
+    "oi_change_pct": -100.0,
+    "funding_status": "long_crowded",
+    "funding_rate": 5.448,
+    "risk_level": "high",
+    "derivatives_signal": "bearish",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 41
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 70
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "high",
+    "volatility_ratio": 2.23,
+    "block": false,
+    "score": 40
+  },
+  "rpc": {
+    "block": 104849408,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "OI drop short trap risk"
+}

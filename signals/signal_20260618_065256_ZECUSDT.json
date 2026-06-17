@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-18 06:52:18",
+  "symbol": "ZECUSDT",
+  "direction": "NO TRADE",
+  "final_score": 11,
+  "probability": 0.0,
+  "price": 477.62,
+  "derivatives": {
+    "oi_trend": "declining",
+    "oi_change_pct": -99.92,
+    "funding_status": "long_crowded",
+    "funding_rate": 477.62,
+    "risk_level": "high",
+    "derivatives_signal": "bearish",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 97
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "high",
+    "volatility_ratio": 2.54,
+    "block": false,
+    "score": 40
+  },
+  "rpc": {
+    "block": 104849444,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "OI drop short trap risk"
+}
