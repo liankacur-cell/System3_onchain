@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-17 17:22:18",
+  "symbol": "XRPUSDT",
+  "direction": "NO TRADE",
+  "final_score": 7,
+  "probability": 0.0,
+  "price": 1.1977,
+  "derivatives": {
+    "oi_trend": "rising_bearish",
+    "oi_change_pct": 27180003449.36,
+    "funding_status": "long_crowded",
+    "funding_rate": 325453362.5,
+    "risk_level": "high",
+    "derivatives_signal": "bearish",
+    "crowd_trap": false,
+    "score": 26
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 59
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "neutral",
+      "strength": 50
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.74,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 104741438,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "High risk, score insufficient"
+}
