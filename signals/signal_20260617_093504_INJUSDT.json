@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-17 09:34:19",
+  "symbol": "INJUSDT",
+  "direction": "NO TRADE",
+  "final_score": 35,
+  "probability": 0.0,
+  "price": 5.671,
+  "derivatives": {
+    "oi_trend": "rising_bullish",
+    "oi_change_pct": 64878335.29,
+    "funding_status": "long_crowded",
+    "funding_rate": 3669524.3,
+    "risk_level": "high",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 56
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 52
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 57
+    },
+    "30m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 98
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.95,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 104679121,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "OI spike long trap risk"
+}
