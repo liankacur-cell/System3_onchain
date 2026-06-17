@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-18 00:07:18",
+  "symbol": "WLDUSDT",
+  "direction": "WATCH",
+  "final_score": 47,
+  "probability": 0.4,
+  "price": 0.6728,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 1.51,
+    "funding_status": "long_crowded",
+    "funding_rate": 0.6728,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "15m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "high",
+    "volatility_ratio": 2.56,
+    "block": false,
+    "score": 40
+  },
+  "rpc": {
+    "block": 104795461,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Marginal setup (47)"
+}
