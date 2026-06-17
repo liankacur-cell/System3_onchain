@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-18 06:07:18",
+  "symbol": "BNBUSDT",
+  "direction": "NO TRADE",
+  "final_score": 7,
+  "probability": 0.0,
+  "price": 599.91,
+  "derivatives": {
+    "oi_trend": "rising_bearish",
+    "oi_change_pct": 91200.19,
+    "funding_status": "long_crowded",
+    "funding_rate": 547801.16,
+    "risk_level": "high",
+    "derivatives_signal": "bearish",
+    "crowd_trap": false,
+    "score": 26
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 77
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.89,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 104843408,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "High risk, score insufficient"
+}

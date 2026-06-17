@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-18 06:07:18",
+  "symbol": "INJUSDT",
+  "direction": "NO TRADE",
+  "final_score": 7,
+  "probability": 0.0,
+  "price": 5.428,
+  "derivatives": {
+    "oi_trend": "rising_bearish",
+    "oi_change_pct": 69232994.31,
+    "funding_status": "long_crowded",
+    "funding_rate": 3736510.1,
+    "risk_level": "high",
+    "derivatives_signal": "bearish",
+    "crowd_trap": false,
+    "score": 26
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 79
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 98
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "high",
+    "volatility_ratio": 2.21,
+    "block": false,
+    "score": 40
+  },
+  "rpc": {
+    "block": 104843462,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "High risk, score insufficient"
+}
