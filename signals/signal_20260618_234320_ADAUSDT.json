@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-18 23:43:06",
+  "symbol": "ADAUSDT",
+  "direction": "NO TRADE",
+  "final_score": 21,
+  "probability": 0.0,
+  "price": 0.161,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.5,
+    "funding_status": "long_crowded",
+    "funding_rate": 0.161,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": true,
+    "score": 39
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 70
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.25,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 104984117,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Crowd trap detected"
+}

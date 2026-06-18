@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-18 23:43:06",
+  "symbol": "DOGEUSDT",
+  "direction": "NO TRADE",
+  "final_score": 19,
+  "probability": 0.0,
+  "price": 0.08252,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.62,
+    "funding_status": "long_crowded",
+    "funding_rate": 0.0825,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": true,
+    "score": 39
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 34
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.98,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 104984112,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Crowd trap detected"
+}
