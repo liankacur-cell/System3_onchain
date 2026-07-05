@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-06 04:07:21",
+  "symbol": "TLMUSDT",
+  "direction": "WATCH",
+  "final_score": 55,
+  "probability": 0.0,
+  "price": 0.003455,
+  "derivatives": {
+    "oi_trend": "declining",
+    "oi_change_pct": -6.32,
+    "funding_status": "neutral",
+    "funding_rate": 0.0035,
+    "risk_level": "high",
+    "derivatives_signal": "bullish",
+    "crowd_trap": false,
+    "score": 39
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 41
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 30
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 87
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "extreme",
+    "volatility_ratio": 9.33,
+    "block": true,
+    "score": 30
+  },
+  "rpc": {
+    "block": 108281888,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Opportunity floor override"
+}
