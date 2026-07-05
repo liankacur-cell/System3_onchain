@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-06 01:07:20",
+  "symbol": "VANRYUSDT",
+  "direction": "WATCH",
+  "final_score": 57,
+  "probability": 0.0,
+  "price": 0.005293,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0,
+    "funding_status": "neutral",
+    "funding_rate": 0.0053,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 55
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 53
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 48
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 79
+    }
+  },
+  "volatility": {
+    "state": "extreme",
+    "volatility_ratio": 8.67,
+    "block": true,
+    "score": 30
+  },
+  "rpc": {
+    "block": 108257885,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Opportunity floor override"
+}
