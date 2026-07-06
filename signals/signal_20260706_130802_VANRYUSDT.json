@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-06 13:07:21",
+  "symbol": "VANRYUSDT",
+  "direction": "NO TRADE",
+  "final_score": 45,
+  "probability": 0.0,
+  "price": 0.005342,
+  "derivatives": {
+    "oi_trend": "rising_bullish",
+    "oi_change_pct": 2.16,
+    "funding_status": "neutral",
+    "funding_rate": 0.0053,
+    "risk_level": "medium",
+    "derivatives_signal": "bullish",
+    "crowd_trap": false,
+    "score": 70
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 30
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 60
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 77
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 56
+    }
+  },
+  "volatility": {
+    "state": "extreme",
+    "volatility_ratio": 6.73,
+    "block": true,
+    "score": 30
+  },
+  "rpc": {
+    "block": 108353876,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Extreme volatility block"
+}
