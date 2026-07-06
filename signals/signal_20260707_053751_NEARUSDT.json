@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-07-07 05:37:20",
+  "symbol": "NEARUSDT",
+  "direction": "WEAK LONG",
+  "final_score": 50,
+  "probability": 0.55,
+  "price": 2.074,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.1,
+    "funding_status": "long_crowded",
+    "funding_rate": 2.074,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 77
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 77
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.89,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 108485268,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 2.074,
+    "tp1": 2.1362,
+    "tp2": 2.1984,
+    "tp3": 2.2814,
+    "sl": 1.9703,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 2.074,
+    "entry_2_pullback": 2.0677,
+    "entry_3_deep": 2.0521
+  },
+  "reason": "Early signal zone (50)"
+}
