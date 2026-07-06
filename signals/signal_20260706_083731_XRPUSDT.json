@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-07-06 08:37:20",
+  "symbol": "XRPUSDT",
+  "direction": "WEAK LONG",
+  "final_score": 51,
+  "probability": 0.55,
+  "price": 1.1608,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.59,
+    "funding_status": "long_crowded",
+    "funding_rate": 1.1608,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.74,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 108317812,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 1.1608,
+    "tp1": 1.1956,
+    "tp2": 1.2304,
+    "tp3": 1.2769,
+    "sl": 1.1028,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 1.1608,
+    "entry_2_pullback": 1.1571,
+    "entry_3_deep": 1.1529
+  },
+  "reason": "Early signal zone (51)"
+}
