@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-06 22:08:56",
+  "symbol": "APTUSDT",
+  "direction": "NO TRADE",
+  "final_score": 9,
+  "probability": 0.0,
+  "price": 0.622,
+  "derivatives": {
+    "oi_trend": "rising_bearish",
+    "oi_change_pct": 4114979262.75,
+    "funding_status": "long_crowded",
+    "funding_rate": 25183673.7,
+    "risk_level": "high",
+    "derivatives_signal": "bearish",
+    "crowd_trap": false,
+    "score": 26
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 30
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 36
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 48
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.18,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 108425570,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "High risk, score insufficient"
+}

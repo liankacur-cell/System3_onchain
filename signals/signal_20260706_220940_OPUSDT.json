@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-06 22:08:56",
+  "symbol": "OPUSDT",
+  "direction": "NO TRADE",
+  "final_score": 35,
+  "probability": 0.0,
+  "price": 0.1064,
+  "derivatives": {
+    "oi_trend": "rising_bullish",
+    "oi_change_pct": 105813127751.71,
+    "funding_status": "long_crowded",
+    "funding_rate": 111315410.5,
+    "risk_level": "high",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 56
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 30
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 45
+    },
+    "1h": {
+      "direction": "neutral",
+      "strength": 50
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.11,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 108425584,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "High risk, score insufficient"
+}
