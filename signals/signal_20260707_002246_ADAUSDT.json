@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-07 00:22:21",
+  "symbol": "ADAUSDT",
+  "direction": "NO TRADE",
+  "final_score": 26,
+  "probability": 0.0,
+  "price": 0.1838,
+  "derivatives": {
+    "oi_trend": "rising_bearish",
+    "oi_change_pct": 258627601626.93,
+    "funding_status": "long_crowded",
+    "funding_rate": 479236946.0,
+    "risk_level": "high",
+    "derivatives_signal": "bearish",
+    "crowd_trap": false,
+    "score": 26
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 30
+    },
+    "15m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 59
+    },
+    "1h": {
+      "direction": "neutral",
+      "strength": 50
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.43,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 108443272,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "High risk, score insufficient"
+}
