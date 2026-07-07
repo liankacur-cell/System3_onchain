@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-07 13:07:21",
+  "symbol": "ETHUSDT",
+  "direction": "NO TRADE",
+  "final_score": 24,
+  "probability": 0.0,
+  "price": 1769.39,
+  "derivatives": {
+    "oi_trend": "rising_bearish",
+    "oi_change_pct": 128060.0,
+    "funding_status": "long_crowded",
+    "funding_rate": 2256897.52,
+    "risk_level": "high",
+    "derivatives_signal": "bearish",
+    "crowd_trap": false,
+    "score": 26
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 59
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 48
+    },
+    "30m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "1h": {
+      "direction": "neutral",
+      "strength": 50
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.79,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 108545184,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "High risk, score insufficient"
+}
