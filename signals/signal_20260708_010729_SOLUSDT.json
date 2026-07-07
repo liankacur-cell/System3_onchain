@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-08 01:07:21",
+  "symbol": "SOLUSDT",
+  "direction": "WATCH",
+  "final_score": 48,
+  "probability": 0.4,
+  "price": 82.34,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.13,
+    "funding_status": "long_crowded",
+    "funding_rate": 82.34,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 30
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 76
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "neutral",
+      "strength": 50
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.86,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 108641072,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Marginal setup (48)"
+}

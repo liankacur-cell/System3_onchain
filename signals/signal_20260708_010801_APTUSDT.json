@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-07-08 01:07:21",
+  "symbol": "APTUSDT",
+  "direction": "WEAK LONG",
+  "final_score": 50,
+  "probability": 0.55,
+  "price": 0.642,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.16,
+    "funding_status": "long_crowded",
+    "funding_rate": 0.642,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 30
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 83
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 85
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.44,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 108641135,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 0.642,
+    "tp1": 0.6613,
+    "tp2": 0.6805,
+    "tp3": 0.7062,
+    "sl": 0.6099,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 0.642,
+    "entry_2_pullback": 0.6396,
+    "entry_3_deep": 0.6349
+  },
+  "reason": "Early signal zone (50)"
+}

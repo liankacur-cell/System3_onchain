@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-07-08 01:07:21",
+  "symbol": "ETHUSDT",
+  "direction": "WEAK LONG",
+  "final_score": 51,
+  "probability": 0.55,
+  "price": 1803.96,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.03,
+    "funding_status": "long_crowded",
+    "funding_rate": 1803.96,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 30
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 88
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.85,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 108641064,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 1803.96,
+    "tp1": 1858.0788,
+    "tp2": 1912.1976,
+    "tp3": 1984.356,
+    "sl": 1713.762,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 1803.96,
+    "entry_2_pullback": 1799.4143,
+    "entry_3_deep": 1790.8686
+  },
+  "reason": "Early signal zone (51)"
+}
