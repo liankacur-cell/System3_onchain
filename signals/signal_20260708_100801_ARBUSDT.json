@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-08 10:07:20",
+  "symbol": "ARBUSDT",
+  "direction": "NO TRADE",
+  "final_score": 7,
+  "probability": 0.0,
+  "price": 0.0764,
+  "derivatives": {
+    "oi_trend": "rising_bearish",
+    "oi_change_pct": 248441782549.01,
+    "funding_status": "long_crowded",
+    "funding_rate": 187573545.9,
+    "risk_level": "high",
+    "derivatives_signal": "bearish",
+    "crowd_trap": false,
+    "score": 26
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 30
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 98
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 97
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.37,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 108713104,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "High risk, score insufficient"
+}
