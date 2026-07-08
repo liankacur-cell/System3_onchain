@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-08 07:52:20",
+  "symbol": "NEARUSDT",
+  "direction": "NO TRADE",
+  "final_score": 16,
+  "probability": 0.25,
+  "price": 1.991,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.4,
+    "funding_status": "long_crowded",
+    "funding_rate": 1.991,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 30
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 50
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 93
+    },
+    "1h": {
+      "direction": "neutral",
+      "strength": 50
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.65,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 108695121,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Low probability zone (16)"
+}
