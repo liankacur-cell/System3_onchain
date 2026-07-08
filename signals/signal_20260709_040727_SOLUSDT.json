@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-09 04:07:21",
+  "symbol": "SOLUSDT",
+  "direction": "NO TRADE",
+  "final_score": 22,
+  "probability": 0.0,
+  "price": 77.12,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.34,
+    "funding_status": "long_crowded",
+    "funding_rate": 77.12,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": true,
+    "score": 39
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 75
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.85,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 108856999,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Crowd trap detected"
+}
