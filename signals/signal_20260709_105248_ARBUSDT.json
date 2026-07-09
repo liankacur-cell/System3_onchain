@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-07-09 10:52:21",
+  "symbol": "ARBUSDT",
+  "direction": "SHORT",
+  "final_score": 58,
+  "probability": 0.65,
+  "price": 0.0797,
+  "derivatives": {
+    "oi_trend": "rising_bullish",
+    "oi_change_pct": 2.57,
+    "funding_status": "long_crowded",
+    "funding_rate": 0.0797,
+    "risk_level": "medium",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 64
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 30
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.17,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 108911006,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 0.0797,
+    "tp1": 0.0773,
+    "tp2": 0.0749,
+    "tp3": 0.0717,
+    "sl": 0.0837,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 0.0797,
+    "entry_2_pullback": 0.08,
+    "entry_3_deep": 0.0805
+  },
+  "reason": "Confirmed (58)"
+}
