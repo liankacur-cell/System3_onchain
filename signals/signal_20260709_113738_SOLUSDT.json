@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-09 11:37:21",
+  "symbol": "SOLUSDT",
+  "direction": "NO TRADE",
+  "final_score": 28,
+  "probability": 0.25,
+  "price": 77.69,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.58,
+    "funding_status": "long_crowded",
+    "funding_rate": 77.69,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 72
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 48
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.83,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 108917000,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Low probability zone (28)"
+}
