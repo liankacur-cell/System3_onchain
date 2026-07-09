@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-07-10 00:22:21",
+  "symbol": "AVAXUSDT",
+  "direction": "WEAK LONG",
+  "final_score": 50,
+  "probability": 0.55,
+  "price": 6.725,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.07,
+    "funding_status": "long_crowded",
+    "funding_rate": 6.725,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 65
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 57
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 75
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.07,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 109018986,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 6.725,
+    "tp1": 6.9268,
+    "tp2": 7.1285,
+    "tp3": 7.3975,
+    "sl": 6.3887,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 6.725,
+    "entry_2_pullback": 6.7111,
+    "entry_3_deep": 6.6851
+  },
+  "reason": "Early signal zone (50)"
+}
