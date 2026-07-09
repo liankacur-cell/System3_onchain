@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-09 21:22:21",
+  "symbol": "ADAUSDT",
+  "direction": "NO TRADE",
+  "final_score": 26,
+  "probability": 0.0,
+  "price": 0.1682,
+  "derivatives": {
+    "oi_trend": "declining",
+    "oi_change_pct": -100.0,
+    "funding_status": "long_crowded",
+    "funding_rate": 0.1682,
+    "risk_level": "high",
+    "derivatives_signal": "bullish",
+    "crowd_trap": false,
+    "score": 33
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "30m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 90
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.05,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 108994967,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "OI drop short trap risk"
+}
