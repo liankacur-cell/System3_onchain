@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-07-10 19:07:21",
+  "symbol": "OPUSDT",
+  "direction": "WEAK LONG",
+  "final_score": 52,
+  "probability": 0.55,
+  "price": 0.1076,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.74,
+    "funding_status": "long_crowded",
+    "funding_rate": 0.1076,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 30
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 43
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.29,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 109168933,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 0.1076,
+    "tp1": 0.1108,
+    "tp2": 0.1141,
+    "tp3": 0.1184,
+    "sl": 0.1022,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 0.1076,
+    "entry_2_pullback": 0.1073,
+    "entry_3_deep": 0.1066
+  },
+  "reason": "Early signal zone (52)"
+}
