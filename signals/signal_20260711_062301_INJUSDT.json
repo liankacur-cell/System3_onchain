@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-07-11 06:22:21",
+  "symbol": "INJUSDT",
+  "direction": "WEAK LONG",
+  "final_score": 52,
+  "probability": 0.55,
+  "price": 4.962,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.1,
+    "funding_status": "long_crowded",
+    "funding_rate": 4.962,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 76
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 81
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.17,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 109258927,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 4.962,
+    "tp1": 5.1109,
+    "tp2": 5.2597,
+    "tp3": 5.4582,
+    "sl": 4.7139,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 4.962,
+    "entry_2_pullback": 4.9446,
+    "entry_3_deep": 4.9196
+  },
+  "reason": "Early signal zone (52)"
+}
