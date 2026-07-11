@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-07-11 22:52:21",
+  "symbol": "DOGEUSDT",
+  "direction": "WEAK LONG",
+  "final_score": 51,
+  "probability": 0.55,
+  "price": 0.07527,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.01,
+    "funding_status": "long_crowded",
+    "funding_rate": 0.0753,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 68
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.5,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 109390846,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 0.0753,
+    "tp1": 0.0775,
+    "tp2": 0.0798,
+    "tp3": 0.0828,
+    "sl": 0.0715,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 0.0753,
+    "entry_2_pullback": 0.0751,
+    "entry_3_deep": 0.075
+  },
+  "reason": "Early signal zone (51)"
+}
