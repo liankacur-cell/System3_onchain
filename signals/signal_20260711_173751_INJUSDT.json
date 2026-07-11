@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-07-11 17:37:21",
+  "symbol": "INJUSDT",
+  "direction": "WEAK LONG",
+  "final_score": 50,
+  "probability": 0.55,
+  "price": 5.093,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.28,
+    "funding_status": "long_crowded",
+    "funding_rate": 5.093,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.63,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 109348880,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 5.093,
+    "tp1": 5.2458,
+    "tp2": 5.3986,
+    "tp3": 5.6023,
+    "sl": 4.8384,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 5.093,
+    "entry_2_pullback": 5.0763,
+    "entry_3_deep": 5.0373
+  },
+  "reason": "Early signal zone (50)"
+}
