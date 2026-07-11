@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-11 21:22:21",
+  "symbol": "ARBUSDT",
+  "direction": "WATCH",
+  "final_score": 63,
+  "probability": 0.0,
+  "price": 0.0963,
+  "derivatives": {
+    "oi_trend": "rising_bullish",
+    "oi_change_pct": 3.77,
+    "funding_status": "long_crowded",
+    "funding_rate": 0.0963,
+    "risk_level": "medium",
+    "derivatives_signal": "neutral",
+    "crowd_trap": true,
+    "score": 54
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.66,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 109378867,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Opportunity floor override"
+}
