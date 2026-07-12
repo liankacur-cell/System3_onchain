@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-07-12 19:52:22",
+  "symbol": "ZECUSDT",
+  "direction": "WEAK LONG",
+  "final_score": 50,
+  "probability": 0.55,
+  "price": 524.71,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.86,
+    "funding_status": "long_crowded",
+    "funding_rate": 524.71,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.37,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 109558895,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 524.71,
+    "tp1": 540.4513,
+    "tp2": 556.1926,
+    "tp3": 577.181,
+    "sl": 498.4745,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 524.71,
+    "entry_2_pullback": 523.2511,
+    "entry_3_deep": 519.3671
+  },
+  "reason": "Early signal zone (50)"
+}
