@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-12 17:37:21",
+  "symbol": "TUSDT",
+  "direction": "WATCH",
+  "final_score": 62,
+  "probability": 0.0,
+  "price": 0.00604,
+  "derivatives": {
+    "oi_trend": "rising_bullish",
+    "oi_change_pct": 13.96,
+    "funding_status": "neutral",
+    "funding_rate": 0.006,
+    "risk_level": "high",
+    "derivatives_signal": "bullish",
+    "crowd_trap": false,
+    "score": 62
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "extreme",
+    "volatility_ratio": 7.63,
+    "block": true,
+    "score": 30
+  },
+  "rpc": {
+    "block": 109540922,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Opportunity floor override"
+}
