@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-12 15:22:21",
+  "symbol": "AVAXUSDT",
+  "direction": "NO TRADE",
+  "final_score": 13,
+  "probability": 0.0,
+  "price": 6.388,
+  "derivatives": {
+    "oi_trend": "declining",
+    "oi_change_pct": -100.0,
+    "funding_status": "long_crowded",
+    "funding_rate": 6.388,
+    "risk_level": "high",
+    "derivatives_signal": "bearish",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 75
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 49
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.1,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 109522832,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "OI drop short trap risk"
+}
