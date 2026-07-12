@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-12 08:37:21",
+  "symbol": "BNBUSDT",
+  "direction": "NO TRADE",
+  "final_score": 28,
+  "probability": 0.25,
+  "price": 573.34,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.33,
+    "funding_status": "long_crowded",
+    "funding_rate": 573.34,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 33
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 90
+    },
+    "30m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "1h": {
+      "direction": "neutral",
+      "strength": 50
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.42,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 109468823,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Low probability zone (28)"
+}
