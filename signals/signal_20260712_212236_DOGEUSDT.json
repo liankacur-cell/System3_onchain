@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-07-12 21:22:21",
+  "symbol": "DOGEUSDT",
+  "direction": "NO TRADE",
+  "final_score": 28,
+  "probability": 0.0,
+  "price": 0.07325,
+  "derivatives": {
+    "oi_trend": "declining",
+    "oi_change_pct": -100.0,
+    "funding_status": "long_crowded",
+    "funding_rate": 0.0732,
+    "risk_level": "high",
+    "derivatives_signal": "bearish",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 75
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 59
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.52,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 109570815,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "OI drop short trap risk"
+}
