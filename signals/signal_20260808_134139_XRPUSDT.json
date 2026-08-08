@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-08-08 13:41:02",
+  "symbol": "XRPUSDT",
+  "direction": "NO TRADE",
+  "final_score": 39,
+  "probability": 0.25,
+  "price": 1.0338,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.26,
+    "funding_status": "neutral",
+    "funding_rate": 0.0014,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 55
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 30
+    },
+    "30m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 51
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.58,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 114682688,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Low probability zone (39)"
+}
