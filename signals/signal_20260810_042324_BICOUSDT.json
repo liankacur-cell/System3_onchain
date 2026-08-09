@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-08-10 04:21:52",
+  "symbol": "BICOUSDT",
+  "direction": "NO TRADE",
+  "final_score": 17,
+  "probability": 0.0,
+  "price": 0.04856,
+  "derivatives": {
+    "oi_trend": "rising_bearish",
+    "oi_change_pct": 2.03,
+    "funding_status": "long_crowded",
+    "funding_rate": 322892773.0,
+    "risk_level": "medium",
+    "derivatives_signal": "bearish",
+    "crowd_trap": false,
+    "score": 34
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 30
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 30
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 53
+    }
+  },
+  "volatility": {
+    "state": "extreme",
+    "volatility_ratio": 19.73,
+    "block": true,
+    "score": 30
+  },
+  "rpc": {
+    "block": 114992184,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Extreme volatility block"
+}
