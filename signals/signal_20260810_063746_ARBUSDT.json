@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-08-10 06:36:52",
+  "symbol": "ARBUSDT",
+  "direction": "WATCH",
+  "final_score": 48,
+  "probability": 0.4,
+  "price": 0.0794,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.43,
+    "funding_status": "long_crowded",
+    "funding_rate": 230961943.9,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 30
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 38
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 78
+    },
+    "1h": {
+      "direction": "neutral",
+      "strength": 50
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.79,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 115010094,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Marginal setup (48)"
+}

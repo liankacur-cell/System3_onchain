@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-08-10 06:36:52",
+  "symbol": "BMTUSDT",
+  "direction": "WATCH",
+  "final_score": 55,
+  "probability": 0.0,
+  "price": 0.03366,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.55,
+    "funding_status": "long_crowded",
+    "funding_rate": 241001553.0,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": true,
+    "score": 39
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 30
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 36
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 34
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 96
+    }
+  },
+  "volatility": {
+    "state": "extreme",
+    "volatility_ratio": 15.38,
+    "block": true,
+    "score": 30
+  },
+  "rpc": {
+    "block": 115010192,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Opportunity floor override"
+}
