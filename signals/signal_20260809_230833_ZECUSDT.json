@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-08-09 23:06:52",
+  "symbol": "ZECUSDT",
+  "direction": "WATCH",
+  "final_score": 48,
+  "probability": 0.4,
+  "price": 523.49,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.02,
+    "funding_status": "long_crowded",
+    "funding_rate": 498632.773,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 62
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 65
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.77,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 114950216,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Marginal setup (48)"
+}
