@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-08-10 02:06:52",
+  "symbol": "BNBUSDT",
+  "direction": "LONG",
+  "final_score": 60,
+  "probability": 0.65,
+  "price": 608.59,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.06,
+    "funding_status": "neutral",
+    "funding_rate": 0.0118,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 55
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 96
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 97
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.33,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 114974039,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 608.59,
+    "tp1": 626.8477,
+    "tp2": 645.1054,
+    "tp3": 669.449,
+    "sl": 578.1605,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 608.59,
+    "entry_2_pullback": 608.1668,
+    "entry_3_deep": 606.9493
+  },
+  "reason": "Confirmed (60)"
+}
