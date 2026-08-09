@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-08-10 01:21:52",
+  "symbol": "DOGEUSDT",
+  "direction": "NO TRADE",
+  "final_score": 29,
+  "probability": 0.25,
+  "price": 0.07069,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.26,
+    "funding_status": "long_crowded",
+    "funding_rate": 2825817236.0,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "30m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "1h": {
+      "direction": "neutral",
+      "strength": 50
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.29,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 114968060,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Low probability zone (29)"
+}
