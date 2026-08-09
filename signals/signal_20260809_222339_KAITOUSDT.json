@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-08-09 22:21:52",
+  "symbol": "KAITOUSDT",
+  "direction": "NO TRADE",
+  "final_score": 13,
+  "probability": 0.25,
+  "price": 0.6931,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -1.42,
+    "funding_status": "long_crowded",
+    "funding_rate": 47553943.4,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "high",
+    "volatility_ratio": 2.4,
+    "block": false,
+    "score": 40
+  },
+  "rpc": {
+    "block": 114944233,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Low probability zone (13)"
+}
