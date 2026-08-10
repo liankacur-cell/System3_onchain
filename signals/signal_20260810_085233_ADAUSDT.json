@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-08-10 08:51:52",
+  "symbol": "ADAUSDT",
+  "direction": "NO TRADE",
+  "final_score": 12,
+  "probability": 0.25,
+  "price": 0.1957,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.14,
+    "funding_status": "long_crowded",
+    "funding_rate": 513455483.0,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 55
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 83
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 98
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 98
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.75,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 115028062,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Low probability zone (12)"
+}
