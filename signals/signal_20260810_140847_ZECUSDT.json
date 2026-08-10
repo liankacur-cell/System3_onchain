@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-08-10 14:06:52",
+  "symbol": "ZECUSDT",
+  "direction": "NO TRADE",
+  "final_score": 39,
+  "probability": 0.25,
+  "price": 509.62,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.11,
+    "funding_status": "neutral",
+    "funding_rate": 0.0056,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 55
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 39
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 74
+    },
+    "1h": {
+      "direction": "neutral",
+      "strength": 50
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.88,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 115070214,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Low probability zone (39)"
+}
