@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-08-11 02:51:52",
+  "symbol": "ETHUSDT",
+  "direction": "NO TRADE",
+  "final_score": 14,
+  "probability": 0.25,
+  "price": 1872.82,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.11,
+    "funding_status": "long_crowded",
+    "funding_rate": 2384911.314,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bearish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "low",
+    "volatility_ratio": 0.55,
+    "block": false,
+    "score": 50
+  },
+  "rpc": {
+    "block": 115171955,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Low probability zone (14)"
+}
