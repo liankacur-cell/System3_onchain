@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-08-10 23:51:52",
+  "symbol": "TUTUSDT",
+  "direction": "NO TRADE",
+  "final_score": 19,
+  "probability": 0.0,
+  "price": 0.12189,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": -0.66,
+    "funding_status": "long_crowded",
+    "funding_rate": 305451521.0,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": true,
+    "score": 39
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bearish",
+      "strength": 54
+    },
+    "15m": {
+      "direction": "bearish",
+      "strength": 51
+    },
+    "30m": {
+      "direction": "bearish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 45
+    }
+  },
+  "volatility": {
+    "state": "extreme",
+    "volatility_ratio": 17.49,
+    "block": true,
+    "score": 30
+  },
+  "rpc": {
+    "block": 115148165,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Extreme volatility block"
+}
