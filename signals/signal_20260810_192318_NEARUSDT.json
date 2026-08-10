@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-08-10 19:21:52",
+  "symbol": "NEARUSDT",
+  "direction": "WEAK LONG",
+  "final_score": 50,
+  "probability": 0.55,
+  "price": 1.657,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.19,
+    "funding_status": "long_crowded",
+    "funding_rate": 42942965.0,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "neutral",
+      "strength": 50
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "bullish",
+      "strength": 100
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.16,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 115112135,
+    "status": "active"
+  },
+  "levels": {
+    "entry_price": 1.657,
+    "tp1": 1.7067,
+    "tp2": 1.7564,
+    "tp3": 1.8227,
+    "sl": 1.5741,
+    "tp_pct": [
+      3,
+      6,
+      10
+    ],
+    "sl_pct": 5
+  },
+  "entries": {
+    "entry_1_breakout": 1.657,
+    "entry_2_pullback": 1.6529,
+    "entry_3_deep": 1.6451
+  },
+  "reason": "Early signal zone (50)"
+}
