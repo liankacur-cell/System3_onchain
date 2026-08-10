@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-08-10 15:36:52",
+  "symbol": "ARBUSDT",
+  "direction": "WATCH",
+  "final_score": 50,
+  "probability": 0.55,
+  "price": 0.0803,
+  "derivatives": {
+    "oi_trend": "stable",
+    "oi_change_pct": 0.17,
+    "funding_status": "long_crowded",
+    "funding_rate": 232791159.5,
+    "risk_level": "low",
+    "derivatives_signal": "neutral",
+    "crowd_trap": false,
+    "score": 49
+  },
+  "tf_results": {
+    "5m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "15m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "30m": {
+      "direction": "bullish",
+      "strength": 100
+    },
+    "1h": {
+      "direction": "neutral",
+      "strength": 50
+    }
+  },
+  "volatility": {
+    "state": "normal",
+    "volatility_ratio": 1.26,
+    "block": false,
+    "score": 60
+  },
+  "rpc": {
+    "block": 115082071,
+    "status": "active"
+  },
+  "levels": null,
+  "entries": null,
+  "reason": "Early signal zone"
+}
